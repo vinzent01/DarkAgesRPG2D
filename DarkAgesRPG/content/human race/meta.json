@@ -1,0 +1,10 @@
+{
+    "Name" : "package-example",
+    "VersionMajor" : 3,
+    "VersionMinor" : 2,
+    "VersionPatch" : 0,
+    
+    "Requirements" : [
+
+    ]
+}

@@ -1,0 +1,11 @@
+
+{
+    "name" : "Metal Armor Helmet",
+    "type" : "equipment",
+    "equipSlots" : [
+        {
+            "res": "resources/metal_armor_helmet.png",
+            "slot" : "head"
+        }
+    ]
+}

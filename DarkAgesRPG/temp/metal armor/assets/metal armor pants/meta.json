@@ -1,0 +1,10 @@
+{
+    "name" : "Metal Armor Pants",
+    "type" : "equipment",
+    "equipSlots" : [
+        {
+            "res": "resources/metal_armor_pants.png",
+            "slot" : "pants"
+        }
+    ]
+}

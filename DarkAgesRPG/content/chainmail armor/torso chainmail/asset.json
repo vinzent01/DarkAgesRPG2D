@@ -1,0 +1,8 @@
+{
+    "type" : "Equipment",
+    "for_race" : "human",
+    "name" : "head cover chainmail",
+    "id" : "headcoverchainmail",
+    "texture" : "torso_chainmail.png",
+    "equip_slot" : "torso"
+}

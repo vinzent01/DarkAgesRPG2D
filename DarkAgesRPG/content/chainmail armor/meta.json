@@ -1,0 +1,12 @@
+{
+    "Name" : "chainmail armor",
+    "VersionMajor" : 0,
+    "VersionMinor" : 1,
+    "VersionPatch" : 0,
+    
+    "Requirements" : [
+        {
+            "Name" : "human race"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "name" : "Metal Armor Torso",
+    "type" : "equipment",
+    "equipSlots" : [
+        {
+            "res": "resources/metal_armor_torso.png",
+            "slot" : "torso"
+        }
+    ]
+}

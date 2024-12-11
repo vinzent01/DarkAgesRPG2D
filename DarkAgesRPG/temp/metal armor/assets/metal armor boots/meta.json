@@ -1,0 +1,10 @@
+{
+    "name" : "Metal Armor Boots",
+    "type" : "equipment",
+    "equipSlots" : [
+        {
+            "res": "metal_armor_boots.png",
+            "slot" : "boots"
+        }
+    ]
+}

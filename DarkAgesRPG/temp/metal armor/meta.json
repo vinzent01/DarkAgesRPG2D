@@ -1,0 +1,157 @@
+{
+    "name" : "Metal Armor",
+    "dependencies" : [],
+    "packageItems": [
+        {
+            "name" : "Head Cover ChainMail",
+            "type" : "equipment",
+            "equipSlots" : [
+                {
+                    "res": "resources/headCover_chainmain.png",
+                    "slot" : "headCover"
+                }
+            ]
+
+        },
+        {
+            "name" : "Leather Boots",
+            "type" : "equipment",
+            "equipSlots" : [
+                {
+                    "res": "resources/leather_boots.png",
+                    "slot" : "boot"
+                }
+            ]
+        },
+        {
+            "name" : "Leather Helmet",
+            "type" : "equipment",
+            "equipSlots" : [
+                {
+                    "res": "resources/leather_helmet.png",
+                    "slot" : "head"
+                }
+            ]
+        },
+        {
+            "name" : "Leather Pants",
+            "type" : "equipment",
+            "equipSlots" : [
+                {
+                    "res": "resources/leather_pants.png",
+                    "slot" : "pants"
+                }
+            ]
+        },
+        {
+            "name" : "Leather Pants",
+            "type" : "equipment",
+            "equipSlots" : [
+                {
+                    "res": "resources/leather_pants.png",
+                    "slot" : "pants"
+                }
+            ]
+        },
+        {
+            "name" : "Linen Cape",
+            "type" : "equipment",
+            "equipSlots" : [
+                {
+                    "res": "resources/linen_cape.png",
+                    "slot" : "aboveTorso"
+                },
+                {
+                    "res": "resources/linen_cape_back.png",
+                    "slot" : "belowBody"
+                }
+            ]
+        },
+        {
+            "name" : "Linen Hood Cape",
+            "type" : "equipment",
+            "equipSlots" : [
+                {
+                    "res": "resources/linen_hood_cape.png",
+                    "slot" : "aboveTorso"
+                },
+                {
+                    "res": "resources/linen_hood_cape_back.png",
+                    "slot" : "belowBody"
+                }
+            ]
+        },
+        {
+            "name" : "Linen Robe Short",
+            "type" : "equipment",
+            "equipSlots" : [
+                {
+                    "res": "resources/linen_robe_short.png",
+                    "slot" : "torso"
+                }
+            ]
+        },
+        {
+            "name" : "Linen Robe",
+            "type" : "equipment",
+            "equipSlots" : [
+                {
+                    "res": "resources/linen_robe.png",
+                    "slot" : "torso"
+                }
+            ]
+        },
+        {
+            "name" : "Linen Pants",
+            "type" : "equipment",
+            "equipSlots" : [
+                {
+                    "res": "resources/linen_pants.png",
+                    "slot" : "pants"
+                }
+            ]
+        },
+        {
+            "name" : "Linen Tunic",
+            "type" : "equipment",
+            "equipSlots" : [
+                {
+                    "res": "resources/linen_tunic.png",
+                    "slot" : "torso"
+                }
+            ]
+        },
+        {
+            "name" : "Metal Armor Boots",
+            "type" : "equipment",
+            "equipSlots" : [
+                {
+                    "res": "resources/linen_tunic.png",
+                    "slot" : "boots"
+                }
+            ]
+        },
+ 
+
+        {
+            "name" : "Torso ChainMail",
+            "type" : "equipment",
+            "equipSlots" : [
+                {
+                    "res": "resources/torso_chainmail.png",
+                    "slot" : "torso"
+                }
+            ]
+        },
+        {
+            "name" : "Torso Leather Armor",
+            "type" : "equipment",
+            "equipSlots" : [
+                {
+                    "res": "resources/torso_leather_armor.png",
+                    "slot" : "torso"
+                }
+            ]
+        }
+    ] 
+}
