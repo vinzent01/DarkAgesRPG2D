@@ -1,3 +1,4 @@
+using DarkAgesRPG;
 using DarkAgesRPG.GUI;
 using Raylib_cs;
 
@@ -49,5 +50,9 @@ public class Panel : Widget {
     protected override void OnUpdate()
     {
         ImplementDrag();
+
+        if (CloseButton.IsClicked()){
+            Game.RootUI.RemoveWidget(this);
+        }
     }
 }

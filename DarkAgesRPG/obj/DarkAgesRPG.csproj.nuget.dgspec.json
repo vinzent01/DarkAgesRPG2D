@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/vinzent/Projetos/Games/DarkAges2D/DarkAgesRPG/DarkAgesRPG.csproj": {}
+    "/home/vinzent/Projetos/Games/DarkAgesRPG2D/DarkAgesRPG/DarkAgesRPG.csproj": {}
   },
   "projects": {
-    "/home/vinzent/Projetos/Games/DarkAges2D/DarkAgesRPG/DarkAgesRPG.csproj": {
+    "/home/vinzent/Projetos/Games/DarkAgesRPG2D/DarkAgesRPG/DarkAgesRPG.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/vinzent/Projetos/Games/DarkAges2D/DarkAgesRPG/DarkAgesRPG.csproj",
+        "projectUniqueName": "/home/vinzent/Projetos/Games/DarkAgesRPG2D/DarkAgesRPG/DarkAgesRPG.csproj",
         "projectName": "DarkAgesRPG",
-        "projectPath": "/home/vinzent/Projetos/Games/DarkAges2D/DarkAgesRPG/DarkAgesRPG.csproj",
+        "projectPath": "/home/vinzent/Projetos/Games/DarkAgesRPG2D/DarkAgesRPG/DarkAgesRPG.csproj",
         "packagesPath": "/home/vinzent/.nuget/packages/",
-        "outputPath": "/home/vinzent/Projetos/Games/DarkAges2D/DarkAgesRPG/obj/",
+        "outputPath": "/home/vinzent/Projetos/Games/DarkAgesRPG2D/DarkAgesRPG/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/vinzent/.nuget/NuGet/NuGet.Config"
@@ -73,7 +73,7 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.6, 8.0.6]"
+              "version": "[8.0.10, 8.0.10]"
             }
           ],
           "frameworkReferences": {
@@ -81,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.106/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.110/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

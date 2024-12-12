@@ -303,7 +303,7 @@ public class Widget {
     public void Update(){
         OnUpdate();
 
-        foreach (var c in Children){
+        foreach (var c in Children.ToList()){
             c.Update();
         }
     }

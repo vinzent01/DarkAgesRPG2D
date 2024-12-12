@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bf8Dg8D0WZ0pbmxJdQyotm+Pc6oMd5CoJt89YKxiAdaWizdZvf1PobE450dFrI6o/ju0+ixGa8PMuA2/Uf54sQ==",
+  "dgSpecHash": "VQTI1etICY3JJKA6dJecjJPg0mP/XwPIvCr8q4pTZeh0VBywLEYdUdNaRUkEJE7QwT2u9heoXvqOXkGi7Z1JmQ==",
   "success": true,
-  "projectFilePath": "/home/vinzent/Projetos/Games/DarkAges2D/DarkAgesRPG/DarkAgesRPG.csproj",
+  "projectFilePath": "/home/vinzent/Projetos/Games/DarkAgesRPG2D/DarkAgesRPG/DarkAgesRPG.csproj",
   "expectedPackageFiles": [
     "/home/vinzent/.nuget/packages/bezier/0.9.4/bezier.0.9.4.nupkg.sha512",
     "/home/vinzent/.nuget/packages/cs-script/4.8.17/cs-script.4.8.17.nupkg.sha512",
@@ -29,7 +29,7 @@
     "/home/vinzent/.nuget/packages/system.text.encodings.web/8.0.0/system.text.encodings.web.8.0.0.nupkg.sha512",
     "/home/vinzent/.nuget/packages/system.text.json/8.0.0/system.text.json.8.0.0.nupkg.sha512",
     "/home/vinzent/.nuget/packages/system.threading.tasks/4.3.0/system.threading.tasks.4.3.0.nupkg.sha512",
-    "/home/vinzent/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.6/microsoft.aspnetcore.app.ref.8.0.6.nupkg.sha512"
+    "/home/vinzent/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.10/microsoft.aspnetcore.app.ref.8.0.10.nupkg.sha512"
   ],
   "logs": []
 }

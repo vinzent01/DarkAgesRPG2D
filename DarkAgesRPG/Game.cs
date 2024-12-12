@@ -16,7 +16,7 @@ public static class Globals{
 public class Game : IUpdatable, ILoadable, IDrawable
 {
     Object player;
-    Widget RootUI;
+    public static Widget RootUI;
     InventoryDisplay inventoryDisplay;
     PackageManager packageManager;
 

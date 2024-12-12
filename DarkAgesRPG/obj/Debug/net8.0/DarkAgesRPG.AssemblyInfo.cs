@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DarkAgesRPG")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1a1ad40bfac2dea50527e1af6c2ae9880c8bcd91")]
 [assembly: System.Reflection.AssemblyProductAttribute("DarkAgesRPG")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DarkAgesRPG")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
