@@ -10,13 +10,13 @@ public static class Globals{
     public static Camera2D camera;
     public static int TileSize;
     public static World world;
+    public static Widget RootUI;
 }
 
 
 public class Game : IUpdatable, ILoadable, IDrawable
 {
     Object player;
-    public static Widget RootUI;
     InventoryDisplay inventoryDisplay;
     PackageManager packageManager;
 
@@ -33,7 +33,7 @@ public class Game : IUpdatable, ILoadable, IDrawable
         Globals.TileSize = 32;
         Globals.world = new World();
         
-        RootUI = new Widget();
+        Globals.RootUI = new Widget();
     }
 
     ~Game(){
@@ -92,14 +92,14 @@ public class Game : IUpdatable, ILoadable, IDrawable
     }
 
     public void LoadUI(){
-        RootUI.styles.Set("Color", new Color(0,0,0,0));
+        Globals.RootUI.styles.Set("Color", new Color(0,0,0,0));
 
         var playerInventory = player.GetComponent<Inventory>();
 
         if (playerInventory != null)
             inventoryDisplay = new InventoryDisplay(ref playerInventory);
         
-        RootUI.PushWidget(inventoryDisplay);
+        Globals.RootUI.PushWidget(inventoryDisplay);
     }
 
     public void UnLoad(){
@@ -123,7 +123,7 @@ public class Game : IUpdatable, ILoadable, IDrawable
     }
 
     public void DrawHUD(){
-        RootUI.Draw();
+        Globals.RootUI.Draw();
 
     }
 
@@ -137,10 +137,10 @@ public class Game : IUpdatable, ILoadable, IDrawable
         Globals.world.Remove();
 
         if (IsKeyPressed(KeyboardKey.I)){
-            RootUI.PushWidget(inventoryDisplay);
+            Globals.RootUI.PushWidget(inventoryDisplay);
         }
 
-        RootUI.Update();
+        Globals.RootUI.Update();
 
         Globals.camera.Target = player.TotalPosition;
     }

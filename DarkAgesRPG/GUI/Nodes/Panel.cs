@@ -52,7 +52,7 @@ public class Panel : Widget {
         ImplementDrag();
 
         if (CloseButton.IsClicked()){
-            Game.RootUI.RemoveWidget(this);
+            Globals.RootUI.RemoveWidget(this);
         }
     }
 }
