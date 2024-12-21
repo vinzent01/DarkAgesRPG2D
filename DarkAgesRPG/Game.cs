@@ -138,10 +138,11 @@ public class Game : IUpdatable, ILoadable, IDrawable
 
         if (IsKeyPressed(KeyboardKey.I)){
             Globals.RootUI.PushWidget(inventoryDisplay);
+            Globals.RootUI.UpdateStyles();
+            Globals.RootUI.PushWidget(new Panel());
         }
 
         Globals.RootUI.Update();
-
         Globals.camera.Target = player.TotalPosition;
     }
 
