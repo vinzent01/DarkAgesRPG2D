@@ -1,8 +1,8 @@
 
 using System.Numerics;
+using DarkAgesRPG.Gui;
 using Raylib_cs;
 using static Raylib_cs.Raylib;
-using DarkAgesRPG.GUI;
 
 namespace  DarkAgesRPG;
 
@@ -10,14 +10,14 @@ public static class Globals{
     public static Camera2D camera;
     public static int TileSize;
     public static World world;
-    public static Widget RootUI;
+    public static Object player;
+    public static Widgets Widgets = new();
 }
 
 
 public class Game : IUpdatable, ILoadable, IDrawable
 {
     Object player;
-    InventoryDisplay inventoryDisplay;
     PackageManager packageManager;
 
     public Game(){
@@ -32,8 +32,6 @@ public class Game : IUpdatable, ILoadable, IDrawable
         Globals.camera = new();
         Globals.TileSize = 32;
         Globals.world = new World();
-        
-        Globals.RootUI = new Widget();
     }
 
     ~Game(){
@@ -69,37 +67,29 @@ public class Game : IUpdatable, ILoadable, IDrawable
         var chainmail = new Object();
 
         chainmail.AddComponent(new Sprite("./content/chainmail armor/chainmail head cover/headCover_chainmain.png"));
+        chainmail.AddComponent(new InteractComponent());
+        chainmail.AddComponent(new ActionsToPerform(new List<Action>(){
+            new TakeAction(),
+            new EquipAction()
+        }));
+
         chainmail.Name = "Chainmail head cover";
         chainmail.id = "chainmail-head-cover";
 
-        var chainmail2 = new Object();
-        chainmail2.Name = "Chainmail head cover";
-        chainmail2.id = "chainmail-head-cover";
-
+        Globals.world.Add(chainmail);
         Globals.world.Add(player);
+        Globals.player = player;
 
         foreach (var obj in  Globals.world.Objects){
             obj.Load();
         }
-
-        var playerInventory = player.GetComponent<Inventory>();
-        playerInventory.AddItem(chainmail);
-        playerInventory.AddItem(chainmail2);
-
 
         var body = player.GetComponent<Sprite>();
         body.offset = new Vector2(0, -body.Texture.Height / 2);
     }
 
     public void LoadUI(){
-        Globals.RootUI.styles.Set("Color", new Color(0,0,0,0));
-
-        var playerInventory = player.GetComponent<Inventory>();
-
-        if (playerInventory != null)
-            inventoryDisplay = new InventoryDisplay(ref playerInventory);
-        
-        Globals.RootUI.PushWidget(inventoryDisplay);
+        var playerInventory = player.GetComponent<Inventory>();        
     }
 
     public void UnLoad(){
@@ -123,8 +113,10 @@ public class Game : IUpdatable, ILoadable, IDrawable
     }
 
     public void DrawHUD(){
-        Globals.RootUI.Draw();
 
+        foreach (var widget in Globals.Widgets.ToList()){
+            widget.DrawHUD();
+        }
     }
 
     public void Update(float delta){
@@ -134,15 +126,11 @@ public class Game : IUpdatable, ILoadable, IDrawable
             obj.Update(delta);
         }
 
-        Globals.world.Remove();
-
-        if (IsKeyPressed(KeyboardKey.I)){
-            Globals.RootUI.PushWidget(inventoryDisplay);
-            Globals.RootUI.UpdateStyles();
-            Globals.RootUI.PushWidget(new Panel());
+        foreach (var widget in Globals.Widgets){
+            widget.Update(delta);
         }
 
-        Globals.RootUI.Update();
+        Globals.world.Remove();
         Globals.camera.Target = player.TotalPosition;
     }
 

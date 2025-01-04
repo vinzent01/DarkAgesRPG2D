@@ -1,4 +1,6 @@
 using System.Numerics;
+using System.Reflection.Metadata;
+using Raylib_cs;
 
 namespace DarkAgesRPG;
 
@@ -6,7 +8,51 @@ interface IAssetInstance {
     public void LoadFromAsset(Asset asset);
 }
 
+public class Action {
+    public string Name;
+
+    public Action(string Name){
+        this.Name = Name;
+    }
+
+    public virtual bool Execute(Object obj, Object target){
+        return false;
+    }   
+}
+
+public class TakeAction : Action {
+
+    public TakeAction() : base("Take") {
+
+    }
+
+    public override bool Execute(Object obj, Object target)
+    {
+        return true;
+    }
+}
+
+public class EquipAction : Action {
+    public EquipAction() : base("Equip") {
+
+    }
+
+    public override bool Execute(Object obj, Object target)
+    {
+        Equipments? equips = target.GetComponent<Equipments>();
+
+        if (equips == null)
+            return false;
+
+        equips.AddEquip(obj);
+        return true;
+    }
+}
+
+
 public class Object : IDrawable, ILoadable, IUpdatable, IAssetInstance{
+
+
     public Vector2 TotalPosition{
         get {
             if (Parent != null)
@@ -74,7 +120,7 @@ public class Object : IDrawable, ILoadable, IUpdatable, IAssetInstance{
     }
 
     public void RemoveComponent<T>() where T : Component{
-        foreach (var c in Components){
+        foreach (var c in Components.ToList()){
             if (c is T){
                 c.owner = null;
                 Components.Remove(c);
@@ -138,10 +184,10 @@ public class Object : IDrawable, ILoadable, IUpdatable, IAssetInstance{
         }
     }
 
+
     public virtual void Update(float delta){
         foreach (var c in Components){
             c.Update(delta);
         }
     }
-
 }

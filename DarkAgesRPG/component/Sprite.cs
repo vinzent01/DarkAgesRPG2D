@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Numerics;
+using DarkAgesRPG.Gui;
 using Raylib_cs;
 using static Raylib_cs.Raylib;
 
@@ -47,4 +48,20 @@ public class Sprite : Component {
         Rectangle rect = new(0,0, width, height);
         DrawTextureRec(Texture, rect, owner.TotalPosition + offset, Color );
     }
+
+    public bool Contains(Vector2 position){
+
+        if (owner != null){
+            if (position.X >= owner.TotalPosition.X && position.X <= owner.TotalPosition.X + Width ){
+
+                if (position.Y >= owner.TotalPosition.Y && position.Y <= owner.TotalPosition.Y + Height){
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+
+    }
+
 }

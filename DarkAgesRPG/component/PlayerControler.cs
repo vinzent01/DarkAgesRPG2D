@@ -1,6 +1,7 @@
 
 using System.Geometry;
 using System.Numerics;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Raylib_cs;
 using static Raylib_cs.Raylib;
 
@@ -48,24 +49,38 @@ public class PlayerControler : Component{
 
     public Vector2 GetInputDirection(){
         Vector2 InputDirection = Vector2.Zero;
-        Sprite sprite = owner.GetComponent<Sprite>();
 
-        if (IsKeyDown(KeyboardKey.A)){
-            InputDirection.X = -1;
-            
+
+        // flip all children
+        void FlipRecursive(Object currentObj, bool flipped){
+
+            // Flip the current object's sprite if it exists
+            Sprite? sprite = currentObj.GetComponent<Sprite>();
             if (sprite != null)
-                sprite.isFliped = true;
+            {
+                sprite.isFliped = flipped;
+            }
+
+            // Iterate over the children and call the method recursively
+            foreach (var child in currentObj.Children.ToList())
+            {
+                FlipRecursive(child, flipped);
+            }
         }
-        else if (IsKeyDown(KeyboardKey.D)){
+
+        if (Input.IsKeyDown(KeyboardKey.A)){
+            InputDirection.X = -1;
+            FlipRecursive(owner, true);
+        }
+        else if (Input.IsKeyDown(KeyboardKey.D)){
             InputDirection.X = 1;
 
-            if (sprite != null)
-                sprite.isFliped= false;
+            FlipRecursive(owner, false);
         }
-        if (IsKeyDown(KeyboardKey.W)){
+        if (Input.IsKeyDown(KeyboardKey.W)){
             InputDirection.Y = -1;
         }
-        else if (IsKeyDown(KeyboardKey.S)){
+        else if (Input.IsKeyDown(KeyboardKey.S)){
             InputDirection.Y = 1;
         }
 
