@@ -5,34 +5,44 @@ using Raylib_cs;
 namespace DarkAgesRPG.Gui;
 
 public class ButtonText : Widget {
-    public string Text;
-    public ButtonText(Vector2 pos, string Text){
-        this.Position = pos;
-        this.Text = Text;
+
+    System.Action? OnClick;
+
+    public ButtonText(string Text, System.Action? OnClick = null){
+        backgroundColor = Color.Blue;
+        this.color = Color.White;
+        this.DoMouseCollision = true;
+        this.margin = new Margin{
+            bottom = 10, left = 10, right = 10, top = 10
+        };
+
+        id = "buttonText";
+
+        if (OnClick != null)
+            this.OnClick = OnClick;
+            
+        var textWidget = new TextWidget(Text, 22);
+        textWidget.DoMouseCollision = false;
+
+        AddChild(textWidget);
     }
 
-    public override void DrawHUD()
+    protected override void OnDrawHud()
     {
-        this.Size.X = Raylib.MeasureText(Text, 22);
-        this.Size.Y = 22;
-
-        Color color;
-
-        if (MouseInWidget()){
-            color = Color.DarkBlue;
+        if (GetRoot().GetWidgetOnMouse() == this ){
+            backgroundColor = Color.DarkBlue;
         }
         else {
-            color = Color.Blue;
+            backgroundColor = Color.Blue;
         }
-
-        Raylib.DrawRectangle((int)Position.X, (int)Position.Y, (int)this.Size.X  + 10, 22 + 10, color);
-        Raylib.DrawText(Text, (int)Position.X + 5, (int)Position.Y + 5, 22, Color.White);
     }
 
-    public bool IsClick(){
-        if (MouseInWidget() && Raylib.IsMouseButtonPressed(MouseButton.Left)){
-            return true;
+    protected override void OnUpdate(float delta)
+    {
+        if (IsClick()){
+            OnClick();
         }
-        return false;
     }
+
+
 }

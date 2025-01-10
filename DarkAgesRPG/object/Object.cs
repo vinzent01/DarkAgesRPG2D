@@ -4,80 +4,55 @@ using Raylib_cs;
 
 namespace DarkAgesRPG;
 
-interface IAssetInstance {
-    public void LoadFromAsset(Asset asset);
-}
 
-public class Action {
-    public string Name;
+public class Object : IDrawable, ILoadable, IUpdatable{
 
-    public Action(string Name){
-        this.Name = Name;
+    public bool IsVisible;
+    protected int zIndex = 0;
+
+    public int TotalZ {
+        get {
+            if (Parent != null)
+                return Parent.zIndex + zIndex;
+            return this.zIndex;
+        }
+        set {
+            zIndex = value;
+        }
     }
 
-    public virtual bool Execute(Object obj, Object target){
-        return false;
-    }   
-}
 
-public class TakeAction : Action {
-
-    public TakeAction() : base("Take") {
-
-    }
-
-    public override bool Execute(Object obj, Object target)
-    {
-        return true;
-    }
-}
-
-public class EquipAction : Action {
-    public EquipAction() : base("Equip") {
-
-    }
-
-    public override bool Execute(Object obj, Object target)
-    {
-        Equipments? equips = target.GetComponent<Equipments>();
-
-        if (equips == null)
-            return false;
-
-        equips.AddEquip(obj);
-        return true;
-    }
-}
-
-
-public class Object : IDrawable, ILoadable, IUpdatable, IAssetInstance{
-
-
-    public Vector2 TotalPosition{
+    public Vector2 TotalPosition {
         get {
             if (Parent != null)
                 return Parent.TotalPosition + RelativePosition;
-            
+
             return RelativePosition;
         }
-        set
-        {
-            if (Parent != null){
+        set {
+            if (Parent != null) {
                 RelativePosition = value - Parent.TotalPosition;
-            }
-            else{
+            } else {
                 RelativePosition = value;
             }
         }
     }
 
-    public Vector2i CellPosition{
+    public Vector2i CellPosition {
         get {
-            return new Vector2i(TotalPosition / Globals.TileSize);
+            return new Vector2i(
+                (int)(TotalPosition.X / Globals.TileSize),
+                (int)(TotalPosition.Y / Globals.TileSize)
+            );
         }
         set {
-            Vector2i newPos = value * Globals.TileSize;
-            TotalPosition = new Vector2(newPos.X, newPos.Y);
+            Vector2 newTotalPosition = new Vector2(value.X * Globals.TileSize, value.Y * Globals.TileSize);
+
+            if (Parent != null) {
+                RelativePosition = newTotalPosition - Parent.TotalPosition;
+            } else {
+                RelativePosition = newTotalPosition;
+            }
         }
     }
 
@@ -93,9 +68,32 @@ public class Object : IDrawable, ILoadable, IUpdatable, IAssetInstance{
         id = "none";
         Children = new();
         Components = new();
+        IsVisible = true;
     }
 
-    public bool HasComponent<T>() where T : Component{
+    public Object(string name, string id, params Component[] components){
+        this.Name = name;
+        this.id = id;
+
+        Components = new();
+        Children = new();
+        IsVisible = true;
+
+        foreach (var component in components){
+            AddComponent(component);
+        }
+    }
+
+    public bool HasComponent(Component component){
+        foreach (var c in Components){
+            if (c == component){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool HasComponentType<T>(){
         foreach (var c in Components){
             if (c is T){
                 return true;
@@ -105,7 +103,7 @@ public class Object : IDrawable, ILoadable, IUpdatable, IAssetInstance{
     }
 
     public void AddComponent<T>(T component) where T : Component{
-        if (!HasComponent<T>()){
+        if (!HasComponent(component)){
             component.owner = this;
             Components.Add(component);
         }
@@ -128,10 +126,6 @@ public class Object : IDrawable, ILoadable, IUpdatable, IAssetInstance{
         }
     }
 
-    public virtual void LoadFromAsset(Asset asset){
-        Name = asset.name;
-        id = asset.id;
-    }
 
     public bool HasChild(Object obj){
         foreach (var c in Children){
@@ -175,11 +169,14 @@ public class Object : IDrawable, ILoadable, IUpdatable, IAssetInstance{
     }
 
     public virtual void Draw(){
+        if (!IsVisible)
+            return;
+
         foreach (var c in Components){
             c.Draw();
         }
 
-        foreach (var c in Children){
+        foreach (var c in World.SortObjectsByPosition(Children)){
             c.Draw();
         }
     }

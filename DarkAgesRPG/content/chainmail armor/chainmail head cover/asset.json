@@ -1,8 +1,13 @@
 {
-    "type" : "Equipment",
-    "for_race" : "human",
-    "name" : "head cover chainmail",
-    "id" : "headcoverchainmail",
-    "texture" : "headCover_chainmain.png",
-    "equip_slot" : "headCover"
+    "Name" : "head cover chainmail",
+    "id" : "head cover chainmail",
+
+    "components" : [
+        {
+            "className" : "Sprite",
+            "parameters" : {
+                "path" : "./headCover_chainmain.png"
+            }
+        }
+    ]
 }

@@ -1,3 +1,5 @@
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
 namespace DarkAgesRPG;
 
 public class World {
@@ -33,9 +35,29 @@ public class World {
     }
 
     public void Remove(){
-        foreach (var obj in ObjectsToRemove){
+        foreach (var obj in ObjectsToRemove.ToList()){
             Objects.Remove(obj);
+            ObjectsToRemove.Remove(obj);
         }
+    }
+
+    public static List<Object> SortObjectsByPosition(List<Object> objects) {
+
+        return objects
+            .OrderBy(obj =>  { 
+                var sprite = obj.GetComponent<Sprite>(); 
+                float yPosition = obj.TotalPosition.Y;
+                float zOrder = obj.TotalZ;
+
+                // Se o objeto tiver um sprite, considere a altura para calcular a ordenação.
+                if (sprite != null)
+                {
+                    yPosition += sprite.Height;
+                }
+
+                return yPosition + zOrder;
+            })
+            .ToList();
     }
 
 }

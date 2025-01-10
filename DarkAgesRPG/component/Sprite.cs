@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Numerics;
+using System.Xml.Schema;
 using DarkAgesRPG.Gui;
 using Raylib_cs;
 using static Raylib_cs.Raylib;
@@ -12,6 +13,7 @@ public class Sprite : Component {
     public Color Color;
     public bool isFliped;
     public Vector2 offset;
+    public Vector2 Origin;
 
     public int Width {
         get {
@@ -30,7 +32,6 @@ public class Sprite : Component {
         isFliped = false;
         TexturePath = texturePath;
     }
-
     public override void Load(){
         Debug.Assert(File.Exists(TexturePath));
         Texture = LoadTexture(TexturePath);
@@ -44,9 +45,21 @@ public class Sprite : Component {
     public override void Draw(){
         int width = isFliped? -Texture.Width : Texture.Width;
         int height = Texture.Height;
-        
+
+        Vector2 totalOffset = offset;
+
         Rectangle rect = new(0,0, width, height);
-        DrawTextureRec(Texture, rect, owner.TotalPosition + offset, Color );
+        DrawTexturePro(
+            Texture, 
+            rect, 
+            new Rectangle(
+                owner.TotalPosition + totalOffset, 
+                new Vector2(Texture.Width, Texture.Height)
+            ), 
+            Origin, 
+            0, 
+            Color
+        );
     }
 
     public bool Contains(Vector2 position){

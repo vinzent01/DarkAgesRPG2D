@@ -4,50 +4,72 @@ using Raylib_cs;
 
 namespace DarkAgesRPG.Gui;
 
+public class ActionButton : ButtonText {
+    Action action;
+    private Object obj;
+    private Object target;
+
+    public ActionButton(string text, Action action, Object obj, Object target) : base(text){
+        this.action = action;
+        this.obj = obj;
+        this.target = target;
+    }
+
+    protected override void OnUpdate(float delta)
+    {
+        if (IsClick()){
+            action.Execute(obj, target);
+        }
+    }
+}
+
 public class ActionMenu : Widget{
 
     public Object Object;
     public Object Target;
 
-    public ActionMenu(Object obj, Object target, Vector2 pos){
-        this.Object = obj;
-        this.Target = target;
-        this.Position = pos;
-        this.Size.X = 250;
-        this.Size.Y = 400;
-        CanDrag = true;
+    public void ExecuteAction(Action action){
+        action.Execute(Object, Target);
     }
 
-    public override void DrawHUD()
-    {
+    public ActionMenu(Object obj, Object target){
+        this.Object = obj;
+        this.Target = target;
+        this.margin = new Margin{
+            bottom = 10, left= 10, right= 10, top = 10
+        };
+
+        backgroundColor = new Color(25,25,25,100);
+        CanDrag = true;
+
         var ActionsToPerform = Object.GetComponent<ActionsToPerform>();
+        var ActionsText = new TextWidget(obj.Name + " Actions", 22);
 
-        Raylib.DrawRectangle((int)Position.X,(int)Position.Y,(int)Size.X,(int)Size.Y, new Color(25,25,25,100));
-        Raylib.DrawText(Object.Name,(int)Position.X, (int)Position.Y, 22, Color.White);
+        ActionsText.DoMouseCollision =false;
 
-        int PaddingY = 22;
+        AddChild(
+            new HorizontalContainer(
+                ActionsText,
+                new ButtonText("X", this.CloseWidget)
+            )
+        );
 
         if (ActionsToPerform != null){            
             // Buttons
             foreach (var action in ActionsToPerform.Actions){
-                int gap = 5;
-                int margin = 10;
+                if (action.MeetsCondition(Object, Target)){
+                    System.Action performAction =  () =>{action.Execute(Object, Target); this.CloseWidget();};
 
-                ButtonText button = new (new Vector2(Position.X, Position.Y + PaddingY), action.Name);
-
-                button.DrawHUD();
-
-                if (button.IsClick()){
-                    action.Execute(Object, Target);
-
-                    Globals.Widgets.Remove(this);
+                    AddChild(
+                        new ButtonText(action.Name, performAction)
+                    );
                 }
-
-                PaddingY += 22 + gap + margin;
             }
         }
         else {
-            Raylib.DrawText("This Object has no actions to perform", (int)Position.X, (int)Position.Y, 22, Color.White);
+            AddChild(
+                new TextWidget("This Object has no actions to perform", 18)
+            );
         }
     }
 }

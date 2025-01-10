@@ -10,6 +10,7 @@ public class PackageManager {
 
         package.LoadMeta();
         package.LoadAssets();
+
         return package;
     }
 
@@ -18,19 +19,23 @@ public class PackageManager {
         Console.WriteLine("Loading Packages from " + directory + "...");
 
         foreach (var folder in Directory.EnumerateDirectories(directory)){
-            try{
-                Packages.Add(LoadPackage(folder));
-            }
-            catch (Exception e){
-                Console.WriteLine(e + " Could Not load package " + folder);
+            var meta = Path.Join(folder, "meta.json");
+            
+            if (File.Exists(meta)){
+                try{
+                    Packages.Add(LoadPackage(folder));
+                }
+                catch (Exception e){
+                    Console.WriteLine(e + " Could Not load package " + folder);
+                }
             }
         }
     }
 
-    public Asset? GetAsset(string id){
+    public Object? GetAsset(string id){
 
         foreach (var package in Packages){
-            Asset? asset = package.GetAsset(id);
+            Object? asset = package.GetAsset(id);
 
             if (asset != null)
                 return asset;

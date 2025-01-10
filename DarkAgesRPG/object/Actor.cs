@@ -2,7 +2,9 @@ namespace DarkAgesRPG;
 
 
 public class Actor : Object {
-    public float WalkSpeed = 100f;
-    public float RunSpeed = 200f;
+
+    public Actor(string Name, string Id, string spritePath){
+
+    }
 
 }

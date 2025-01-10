@@ -1,8 +1,23 @@
 {
-    "type" : "Equipment",
-    "for_race" : "human",
-    "name" : "head cover chainmail",
-    "id" : "headcoverchainmail",
-    "texture" : "torso_chainmail.png",
-    "equip_slot" : "torso"
+    "Name" : "torso chainmail",
+    "id" : "torso chainmail",
+
+    "components" : [
+        {
+            "className" : "Sprite",
+            "parameters" : {
+                "path" : "torso_chainmail.png"
+            }
+        },
+        {
+            "className" : "Equipment",
+            "parameters" : {
+                "offsetX" : 0,
+                "offsetY" : -26
+            }
+        },
+        {
+            "className" : "InteractComponent"
+        }
+    ]
 }
