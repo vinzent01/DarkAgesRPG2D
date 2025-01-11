@@ -38,6 +38,12 @@ public class ItemStack : Object {
         
     }
 
+    public void Add(List<Object> objs){
+        foreach (var item in objs){
+            Add(item);
+        }
+    }
+
     public void Remove(Object obj){
         var ItemStackComponent = GetComponent<ItemStackComponent>();
 

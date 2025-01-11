@@ -153,23 +153,6 @@ public class Widget {
     {
         var root = GetRoot();
 
-        if (IsHolding(delta))
-        {
-            if (CanDrag && root != null)
-            {
-                StartDrag();
-            }
-        }
-        else if (IsClick())
-        {
-            OnClick();
-        }
-
-        if (Raylib.IsMouseButtonReleased(MouseButton.Left))
-        {
-            ResetHolding();
-        }
-
         if (CanDrag && root != null && root.currentDraggingWidget == this)
         {
             if (IsDragging())
@@ -181,6 +164,26 @@ public class Widget {
                 Drop();
             }
         }
+
+        if (IsClick())
+        {
+            OnClick();
+        }
+        else if (IsHolding(delta))
+        {
+            if (CanDrag && root != null)
+            {
+                StartDrag();
+            }
+        }
+
+
+        if (Raylib.IsMouseButtonReleased(MouseButton.Left))
+        {
+            ResetHolding();
+        }
+
+
     }
     protected void StartDrag(){
         var root = GetRoot();
@@ -202,6 +205,11 @@ public class Widget {
         // Finaliza a referência ao widget em arrasto
         if (root != null)
             root.currentDraggingWidget = null;
+        
+        if (droppedOn == this.parent){
+            CancelDrag();
+            return;
+        }
 
         if (droppedOn != null) {
             // Tenta realizar o drop no container identificado
@@ -213,7 +221,6 @@ public class Widget {
             parent?.OnSendDropWidget(this);
             CloseWidget();
 
-            Console.WriteLine("Dropped on " + droppedOn.GetType());
             return;
         }
 
@@ -225,7 +232,6 @@ public class Widget {
             }
 
             // Drop bem-sucedido no chão
-            Console.WriteLine("Dropped on Ground");
             CloseWidget();
             return;
         }
@@ -243,7 +249,6 @@ public class Widget {
             previousParent.AddChild(this);
         }
         else {
-            Console.WriteLine("CancelDrag: No previous parent found, widget is now orphaned!");
             Debug.Assert(false);
         }
         
@@ -317,7 +322,12 @@ public class Widget {
 
     public bool IsClick(){
         var root = GetRoot();
-        if (root != null && root.GetWidgetOnMouse() == this  && Raylib.IsMouseButtonReleased(MouseButton.Left)){
+        if (
+            root != null && 
+            root.GetWidgetOnMouse() == this  && 
+            Raylib.IsMouseButtonReleased(MouseButton.Left) &&
+            root.currentDraggingWidget == null
+        ){
             return true;
         }
         return false;
@@ -555,7 +565,6 @@ public class Widget {
 
     public Vector2i GrowSize(){
 
-        Console.WriteLine(Grow.growX + " " + GetType());
 
         if (Grow.growX == true && parent != null){
             // calculate remaining size of parent
@@ -567,7 +576,6 @@ public class Widget {
                 occupedSize.X += child.Size.X + parent.gap;
             }
 
-            Console.WriteLine(occupedSize);
 
 
             return size - occupedSize;;

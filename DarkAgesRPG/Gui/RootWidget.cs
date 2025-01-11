@@ -39,6 +39,19 @@ public class RootWidget : Widget {
                     Color.Violet
                 );
             }
+
+            var containerOnMouse = GetContainerWidgetOnMouse();
+            
+            if (containerOnMouse != null){
+                Raylib.DrawRectangleLines(
+                    containerOnMouse.GlobalPosition.X, 
+                    containerOnMouse.GlobalPosition.Y, 
+                    (int)containerOnMouse.TotalSize.X, 
+                    (int)containerOnMouse.TotalSize.Y, 
+                    Color.Green
+                );
+            }
+
         }
     }
 
@@ -90,13 +103,19 @@ public class RootWidget : Widget {
                 
                 if (child.Contains(new Vector2i(mousePos)) )
                 {
-                    return GetWidgetOnMouse(child);
+                    return GetContainerWidgetOnMouse(child);
                 }
             }
         }
 
         if (widget.Contains(new Vector2i(mousePos)))
         {
+            if (widget.DoMouseCollision == false)
+                return null;
+
+            if (widget.IsContainer == false)
+                return null;
+            
             return widget;
         }
 

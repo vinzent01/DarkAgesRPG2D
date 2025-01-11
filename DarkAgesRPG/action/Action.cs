@@ -1,3 +1,4 @@
+using CSScripting;
 using DarkAgesRPG.Gui;
 
 namespace DarkAgesRPG;
@@ -32,6 +33,8 @@ public class TakeAction : Action {
         }
 
         obj.IsVisible = false;
+        Globals.world.ToRemove(obj);
+
 
         return true;
     }
@@ -46,6 +49,7 @@ public class TakeAction : Action {
         
         if (Equipments != null && Equipments.HasEquip(obj))
             return false;
+
 
         return true;
     }
@@ -71,8 +75,10 @@ public class EquipAction : Action {
             itemComponent.inventory.RemoveItem(obj);
         }
 
+        Globals.world.ToRemove(obj);
         equips.AddEquip(obj);
         obj.IsVisible = true;
+        
         
         return true;
     }
@@ -140,6 +146,8 @@ public class DropItemAction : Action {
 
     }
 
+
+
     public override bool Execute(Object obj, Object target)
     {
         var inventory = obj.GetComponent<Inventory>();
@@ -151,38 +159,73 @@ public class DropItemAction : Action {
         if (equipment != null && equipment.HasEquip(target))
             equipment.RemoveEquip(target);
 
-
-        // Drop on ground
+        // if has item stack add item to stack
+        // Obtém objetos no chão na posição do objeto
+        var objectsOnGround = Globals.world.Get(obj.CellPosition);
+        
+        foreach (var objOnGround in objectsOnGround){
+            if (objOnGround is ItemstackContainer itemStack){
+                if (target is ItemstackContainer targetItemStack){
+                    // add itemstack items
+                    itemStack.AddItems(targetItemStack.GetItems());
+                }
+                else {
+                    // add one item
+                    itemStack.AddItem(target);
+                }
+                return true;
+            }
+        }
 
         // create an item stack countainer 
         if (target is ItemStack){
-            var container = new Object();
-            container.Name = "Item Stack";
-            container.AddComponent(new InteractComponent());
-            container.AddComponent(new Inventory());
-            container.AddComponent(new Sprite("./content/ItemStack/ItemStack.png"));
-            container.AddComponent(new ActionsToPerform(
-                new List<Action>(){
-                    new OpenInventoryAction()
+
+
+            List<Object> ItemsToAddStack = [target];
+            
+            foreach (var objOnGround in objectsOnGround){
+                if (objOnGround.HasComponentType<Item>()){
+                    ItemsToAddStack.Add(objOnGround);
+                    Globals.world.ToRemove(objOnGround);
                 }
-            ));
-
-            var containerInventory = container.GetComponent<Inventory>();
-
-            if (containerInventory != null){
-                containerInventory.AddItem(target);            
-                containerInventory.OnEmpty = () => {
-                    Globals.world.ToRemove(container); 
-                };
             }
 
-            container.CellPosition = obj.CellPosition;
-            container.IsVisible = true;
-            container.Load();
-            Globals.world.Add(container);
+            var itemStackObject = new ItemstackContainer("item stack", "item-stack", ItemsToAddStack);
+
+            itemStackObject.CellPosition = obj.CellPosition;
+            itemStackObject.IsVisible = true;
+            itemStackObject.Load();
+
+            Globals.world.Add(itemStackObject);
             return true;
         }
         else {
+ 
+
+            // Inicializa a lista com o alvo
+            List<Object> ItemsToAddStack = new List<Object> { target };
+
+
+            foreach (var objOnGround in objectsOnGround) {
+                if (objOnGround.HasComponentType<Item>()) {
+                    ItemsToAddStack.Add(objOnGround); // Adiciona o item à pilha
+                    Globals.world.ToRemove(objOnGround);
+                }
+            }
+
+            if (ItemsToAddStack.Count > 1) {
+                // Cria uma nova pilha de itens
+                var itemStackObject = new ItemstackContainer("item stack", "item-stack", ItemsToAddStack);
+
+                itemStackObject.CellPosition = obj.CellPosition;
+                itemStackObject.IsVisible = true;
+                itemStackObject.Load();
+
+                Globals.world.Add(itemStackObject);
+                return true;
+            }
+
+            // Se houver apenas um item, reposiciona e torna visível
             target.CellPosition = obj.CellPosition;
             target.IsVisible = true;
             Globals.world.Add(target);

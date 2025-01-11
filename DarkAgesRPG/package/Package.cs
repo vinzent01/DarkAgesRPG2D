@@ -28,7 +28,6 @@ public class Package {
         Object? asset = JsonConvert.DeserializeObject<Object>(json);
         Debug.Assert(asset != null);
 
-        Console.WriteLine("LOADED " + asset.id.ToString());
         return asset;
     }
 

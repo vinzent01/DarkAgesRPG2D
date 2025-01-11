@@ -51,7 +51,7 @@ public class Inventory : Component {
             if (itemOrStack is ItemStack itemStack && itemStack.id == item.id) {
                 itemStack.Add(item);
                 itemStack.IsVisible = false;
-                
+
                 if (itemComponent == null){
                     Debug.Fail("Item must have item component 1");
                 }
@@ -104,7 +104,6 @@ public class Inventory : Component {
             obj.Parent = null;
             OnChange?.Invoke();
 
-            Console.WriteLine("EMPTY IVNENTORY ITEM " + owner.GetType());
             if (itemsOrStacks.Count == 0){
 
                 OnEmpty?.Invoke();
@@ -126,7 +125,6 @@ public class Inventory : Component {
 
                     if (itemsOrStacks.Count == 0){
                         OnEmpty?.Invoke();
-                        Console.WriteLine("EMPTY IVNENTORY ITEM STACK");
                     }
 
                     OnChange?.Invoke();

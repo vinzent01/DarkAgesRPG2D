@@ -15,19 +15,22 @@ public class World {
         Objects.Add(obj);
     }
 
-    public Object? Get(Vector2i position){
+    public List<Object> Get(Vector2i position){
+        List<Object> returnObjects = new ();
+
         foreach (var obj in Objects){
             if (obj.CellPosition == position){
-                return obj;
+                returnObjects.Add(obj);
             }
         }
-        return null;
+
+        return returnObjects;
     }
 
     public void ToRemove(Vector2i position){
-        Object? obj = Get(position);
+        List<Object> objs = Get(position);
 
-        if (obj != null)
+        foreach (var obj in objs)
             ObjectsToRemove.Add(obj);
     }
     public void ToRemove(Object obj){

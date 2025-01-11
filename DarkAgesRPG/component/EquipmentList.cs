@@ -73,6 +73,9 @@ public class EquipmentList : Component {
         equips.Remove(equipment);
         equipment.Parent = null;
         equipment.CellPosition = owner.CellPosition;
+        
+        if (OnChange != null)
+            OnChange();
     }
 
     public override void Load()
