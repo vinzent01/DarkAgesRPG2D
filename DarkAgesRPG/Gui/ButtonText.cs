@@ -6,7 +6,7 @@ namespace DarkAgesRPG.Gui;
 
 public class ButtonText : Widget {
 
-    System.Action? OnClick;
+    System.Action? OnClickAction;
 
     public ButtonText(string Text, System.Action? OnClick = null){
         backgroundColor = Color.Blue;
@@ -19,7 +19,7 @@ public class ButtonText : Widget {
         id = "buttonText";
 
         if (OnClick != null)
-            this.OnClick = OnClick;
+            this.OnClickAction = OnClick;
             
         var textWidget = new TextWidget(Text, 22);
         textWidget.DoMouseCollision = false;
@@ -29,7 +29,9 @@ public class ButtonText : Widget {
 
     protected override void OnDrawHud()
     {
-        if (GetRoot().GetWidgetOnMouse() == this ){
+        var root = GetRoot();
+
+        if (root != null && root.GetWidgetOnMouse() == this ){
             backgroundColor = Color.DarkBlue;
         }
         else {
@@ -40,9 +42,7 @@ public class ButtonText : Widget {
     protected override void OnUpdate(float delta)
     {
         if (IsClick()){
-            OnClick();
+            OnClickAction?.Invoke();
         }
     }
-
-
 }

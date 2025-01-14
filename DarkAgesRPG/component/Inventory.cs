@@ -5,8 +5,8 @@ namespace DarkAgesRPG;
 
 public class Inventory : Component {
     public List<Object> itemsOrStacks;
-    public System.Action OnChange;
-    public System.Action OnEmpty;
+    public System.Action? OnChange;
+    public System.Action? OnEmpty;
 
     public Inventory(){
         itemsOrStacks = new();

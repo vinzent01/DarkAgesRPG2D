@@ -5,7 +5,7 @@ namespace DarkAgesRPG;
 public class EquipmentList : Component {
 
     public List<Object> equips;
-    public System.Action OnChange;
+    public System.Action? OnChange;
 
     public EquipmentList(){
         equips = new();
@@ -23,11 +23,11 @@ public class EquipmentList : Component {
         if (HasEquip(equipment))
             return;
 
-        owner.Children.Add(equipment);
+        owner?.Children.Add(equipment);
 
         // add offset
         var EquipSprite = equipment.GetComponent<Sprite>();
-        var ObjectSprite = owner.GetComponent<Sprite>();
+        var ObjectSprite = owner?.GetComponent<Sprite>();
         var EquipInteract = equipment.GetComponent<InteractComponent>();
         var equipEquipment = equipment.GetComponent<EquipmentComponent>();
 
@@ -35,7 +35,7 @@ public class EquipmentList : Component {
         if (EquipSprite != null && ObjectSprite != null){
 
             if (equipEquipment != null){
-                EquipSprite.isFliped = ObjectSprite.isFliped;
+                //EquipSprite.isFliped = ObjectSprite.isFliped;
 
                 EquipSprite.offset = equipEquipment.EquipmentOffset;
             }
@@ -69,10 +69,12 @@ public class EquipmentList : Component {
         // add interact component
         equipment.AddComponent(new InteractComponent());
 
-        owner.Children.Remove(equipment);
+        owner?.Children.Remove(equipment);
         equips.Remove(equipment);
         equipment.Parent = null;
-        equipment.CellPosition = owner.CellPosition;
+
+        if (owner != null)
+            equipment.CellPosition = owner.CellPosition ;
         
         if (OnChange != null)
             OnChange();

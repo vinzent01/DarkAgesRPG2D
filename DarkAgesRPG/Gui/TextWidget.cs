@@ -4,11 +4,22 @@ namespace DarkAgesRPG.Gui;
 
 public class TextWidget : Widget {
 
-    string text;    
+    private string text;
+
+    public string Text {
+        get {
+            return text;
+        }
+        set {
+            text = value;
+            SetWidgetSize(text, this.fontSize);
+        }
+    }
 
     public TextWidget(string text, int fontSize){
         this.text = text;
-        SetFontSizeSize(text, fontSize);
+        this.fontSize = fontSize;
+        SetWidgetSize(text, fontSize);
         this.color = Color.White;
         this.DoMouseCollision = false;
     }

@@ -36,12 +36,14 @@ public class EquipmentObject : Object{
         
         AddComponent(new Item());
         AddComponent(sprite);
+
+        /*
         if (flippedOffset != null){
             AddComponent(new EquipmentComponent(offset, flippedOffset));
         }
         else {
             AddComponent(new EquipmentComponent(offset));
-        }
+        }*/
         AddComponent(new ActionsToPerform(new List<Action>(){
             new TakeAction(),
             new EquipAction()

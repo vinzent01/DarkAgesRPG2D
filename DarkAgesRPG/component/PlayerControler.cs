@@ -51,31 +51,13 @@ public class PlayerControler : Component{
         Vector2 InputDirection = Vector2.Zero;
 
 
-        // flip all children
-        void FlipRecursive(Object currentObj, bool flipped){
-
-            // Flip the current object's sprite if it exists
-            Sprite? sprite = currentObj.GetComponent<Sprite>();
-            if (sprite != null)
-            {
-                sprite.isFliped = flipped;
-            }
-
-            // Iterate over the children and call the method recursively
-            foreach (var child in currentObj.Children.ToList())
-            {
-                FlipRecursive(child, flipped);
-            }
-        }
-
         if (Input.IsKeyDown(KeyboardKey.A)){
             InputDirection.X = -1;
-            FlipRecursive(owner, true);
+            owner.Flip(true);
         }
         else if (Input.IsKeyDown(KeyboardKey.D)){
             InputDirection.X = 1;
-
-            FlipRecursive(owner, false);
+            owner.Flip(false);
         }
         if (Input.IsKeyDown(KeyboardKey.W)){
             InputDirection.Y = -1;

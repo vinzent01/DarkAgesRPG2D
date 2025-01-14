@@ -1,0 +1,159 @@
+[
+    {
+        "Name" : "Dwarf Beard 1",
+        "id" : "dwarf-beard1",
+        "tags" : ["beard"],
+
+
+        "components" : [
+            {
+                "className" : "Beard",
+                "parameters" : {
+                    "spritePath" : "./beard1.png",
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 10,
+                            "Y" : 1
+                        },
+                        "dwarf" : {
+                            "X" : 11,
+                            "Y" : 0
+                        }
+                    },
+                    "racesId" : ["dwarf", "human", "orc", "elf"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "Dwarf Beard 2",
+        "id" : "dwarf-beard2",
+        "tags" : ["beard"],
+
+
+        "components" : [
+            {
+                "className" : "Beard",
+                "parameters" : {
+                    "spritePath" : "./beard2.png",
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 10,
+                            "Y" : 1
+                        },
+                        "dwarf" : {
+                            "X" : 11,
+                            "Y" : 0
+                        }
+                    },
+                    "racesId" : ["dwarf", "human", "orc", "elf"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "Dwarf Beard 3",
+        "id" : "dwarf-beard3",
+        "tags" : ["beard"],
+
+
+        "components" : [
+            {
+                "className" : "Beard",
+                "parameters" : {
+                    "spritePath" : "./beard3.png",
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 10,
+                            "Y" : 1
+                        },
+                        "dwarf" : {
+                            "X" : 11,
+                            "Y" : 0
+                        }
+                    },
+                    "racesId" : ["dwarf", "human", "orc", "elf"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "Dwarf Beard 4",
+        "id" : "dwarf-beard4",
+        "tags" : ["beard"],
+
+
+        "components" : [
+            {
+                "className" : "Beard",
+                "parameters" : {
+                    "spritePath" : "./beard4.png",
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 10,
+                            "Y" : 1
+                        },
+                        "dwarf" : {
+                            "X" : 11,
+                            "Y" : 0
+                        }
+                    },
+                    "racesId" : ["dwarf", "human", "orc", "elf"]
+                }
+
+            }
+        ]
+    },
+    {
+        "Name" : "Dwarf Beard 5",
+        "id" : "dwarf-beard5",
+        "tags" : ["beard"],
+
+
+        "components" : [
+            {
+                "className" : "Beard",
+                "parameters" : {
+                    "spritePath" : "./beard5.png",
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 10,
+                            "Y" : 1
+                        },
+                        "dwarf" : {
+                            "X" : 11,
+                            "Y" : 0
+                        }
+                    },
+                    "racesId" : ["dwarf", "human", "orc", "elf"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "Dwarf Beard 6",
+        "id" : "dwarf-beard6",
+        "tags" : ["beard"],
+
+
+        "components" : [
+            {
+                "className" : "Beard",
+                "parameters" : {
+                    "spritePath" : "./beard5.png",
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 10,
+                            "Y" : 1
+                        },
+                        "dwarf" : {
+                            "X" : 11,
+                            "Y" : 0
+                        }
+                    },
+                    "racesId" : ["dwarf", "human", "orc", "elf"]
+                }
+            }
+        ]
+    }
+]

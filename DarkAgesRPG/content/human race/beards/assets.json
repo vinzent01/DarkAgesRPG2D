@@ -1,0 +1,127 @@
+[
+    {
+        "Name" : "human beard",
+        "id" : "human-beard1",
+        "tags" : ["beard"],
+
+        "components" : [
+            {
+                "className" : "Beard",
+                "parameters" : {
+                    "spritePath" : "./beard1.png",
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 9,
+                            "Y" : 1
+                        },
+                        "dwarf" : {
+                            "X" : 10,
+                            "Y" : 0
+                        }
+                    },
+                    "racesId" : ["dwarf", "human", "orc", "elf"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "human beard 2",
+        "id" : "human-beard2",
+        "tags" : ["beard"],
+
+        "components" : [
+            {
+                "className" : "Beard",
+                "parameters" : {
+                    "spritePath" : "./beard2.png",
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 9,
+                            "Y" : 1
+                        },
+                        "dwarf" : {
+                            "X" : 10,
+                            "Y" : 0
+                        }
+                    },
+                    "racesId" : ["dwarf", "human", "orc", "elf"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "human beard 3",
+        "id" : "human-beard3",
+        "tags" : ["beard"],
+
+        "components" : [
+            {
+                "className" : "Beard",
+                "parameters" : {
+                    "spritePath" : "./beard3.png",
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 9,
+                            "Y" : 1
+                        },
+                        "dwarf" : {
+                            "X" : 10,
+                            "Y" : 0
+                        }
+                    },
+                    "racesId" : ["dwarf", "human", "orc", "elf"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "human beard 4",
+        "id" : "human-beard4",
+        "tags" : ["beard"],
+
+        "components" : [
+            {
+                "className" : "Beard",
+                "parameters" : {
+                    "spritePath" : "./beard4.png",
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 9,
+                            "Y" : 1
+                        },
+                        "dwarf" : {
+                            "X" : 10,
+                            "Y" : 0
+                        }
+                    },
+                    "racesId" : ["dwarf", "human", "orc", "elf"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "human beard 5",
+        "id" : "human-beard5",
+        "tags" : ["beard"],
+
+        "components" : [
+            {
+                "className" : "Beard",
+                "parameters" : {
+                    "spritePath" : "./beard5.png",
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 9,
+                            "Y" : 1
+                        },
+                        "dwarf" : {
+                            "X" : 10,
+                            "Y" : 0
+                        }
+                    },
+                    "racesId" : ["dwarf", "human", "orc", "elf"]
+                }
+            }
+        ]
+    }
+]

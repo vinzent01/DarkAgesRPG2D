@@ -1,0 +1,29 @@
+[
+    {
+        "Name" : "Human Race",
+        "id" : "human",
+        "tags" : ["race"],
+
+        "components" : [
+            {
+                "className" : "RaceComponent",
+                "parameters" : {
+                    "spriteMasculine" : "./male-body.png",
+                    "spriteFeminine" : "./female-body.png",
+                    "raceId" : "human",
+                    "hairColors" : [
+                        "#4f392a",
+                        "#de4a2c",
+                        "#dba13d",
+                        "#ebe4df"
+                    ],
+                    "skinColors" : [
+                        "#eec39a",
+                        "#724a2c",
+                        "#faae65"
+                    ]
+                }
+            }
+        ]
+    }
+]

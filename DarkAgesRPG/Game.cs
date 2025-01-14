@@ -7,11 +7,12 @@ using static Raylib_cs.Raylib;
 namespace  DarkAgesRPG;
 
 public static class Globals{
-    public static Camera2D camera;
+    public static Camera Camera;
     public static int TileSize;
     public static World world;
     public static Object player;
     public static RootWidget RootWidget = new();
+    public static PackageManager packageManager = new();
 
 }
 
@@ -19,7 +20,6 @@ public static class Globals{
 public class Game : IUpdatable, ILoadable, IDrawable
 {
     Object player;
-    PackageManager packageManager;
     bool DrawDebug;
 
     public Game(){
@@ -30,8 +30,7 @@ public class Game : IUpdatable, ILoadable, IDrawable
         InitWindow(screenWidth, screenHeight, "DarkAgesRPG");
         SetTraceLogLevel(TraceLogLevel.Error);
 
-        packageManager = new();        
-        Globals.camera = new();
+        Globals.Camera = new();
         Globals.TileSize = 32;
         Globals.world = new World();
     }
@@ -49,100 +48,8 @@ public class Game : IUpdatable, ILoadable, IDrawable
     }
 
     public void Load(){
-        int screenWidth = GetScreenWidth();
-        int screenHeight = GetScreenHeight();
-
-        Globals.camera.Target = Vector2.Zero;
-        Globals.camera.Offset = new Vector2(screenWidth / 2, screenHeight / 2);
-        Globals.camera.Zoom = 3f;
-
-        packageManager.LoadPackages("./content/");
-
-        // Player
-        player = new Object();
-        
-        player.AddComponent(new Sprite("./content/human race/male-human/HumanMaleBody.png"));
-        player.AddComponent(new PlayerControler());
-        player.AddComponent(new EquipmentList());
-        player.AddComponent(new Inventory());
-        player.AddComponent(new InventoryHud());
-
-        var playerInventory = player.GetComponent<Inventory>();
-
-        var rockItem = new Object();
-        rockItem.Name = "Pedra";
-        rockItem.id = "pedra";
-
-        rockItem.AddComponent(new Item());
-
-        playerInventory.AddItem(rockItem);
-        playerInventory.AddItem(rockItem);
-
-
-        player.Name = "Player";
-        player.id = "player";
-        Globals.world.Add(player);
-
-        // Chainmail
-        var chainmailCover = new EquipmentObject(
-            "Chain Mail",
-            "chainmail-headcover",
-            new Sprite("./content/chainmail armor/chainmail head cover/headCover_chainmain.png"),
-            new Vector2(0, -26),
-            3
-        );
-
-        Globals.world.Add(chainmailCover);
-
-        // Chainmail torso
-        var chainmailTorso = new EquipmentObject(
-            "Chain Mail torso",
-            "chainmail-torso",
-            new Sprite("./content/chainmail armor/torso chainmail/torso_chainmail.png"),
-            new Vector2(0, -18),
-            2
-        );
-
-        chainmailTorso.CellPosition = new Vector2i(1,0);
-        Globals.world.Add(chainmailTorso);
-
-        // leather pants
-        var leatherPants = new EquipmentObject(
-            "Leather Pants",
-            "leather-pants",
-            new Sprite("./content/leather armor/leather pants/leather_pants.png"),
-            new Vector2(0, -5),
-            1
-        );
-
-        leatherPants.CellPosition = new Vector2i(2,0);
-        Globals.world.Add(leatherPants);
-
-        // leather boots
-        var leatherBoots = new EquipmentObject(
-            "Leather Boots",
-            "leather-boots",
-            new Sprite("./content/leather armor/leather boots/leather_boots.png"),
-            new Vector2(0,-4),
-            2
-        );
-
-        leatherBoots.CellPosition = new Vector2i(3,0);
-        Globals.world.Add(leatherBoots);
-
-        // sword
-
-        var ironSword = new EquipmentObject(
-            "Iron Sword",
-            "iron-sword",
-            new Sprite("./content/melee weapons/sword.png"),
-            new Vector2(0,-23),
-            new Vector2(0,23),
-            4
-        );
-
-        ironSword.CellPosition = new Vector2i(4, 0);
-        Globals.world.Add(ironSword);
+        Globals.packageManager.LoadPackages("./content/");
+        Globals.packageManager.PrintAllAssets();
 
         // chest
         var chest = new Object(
@@ -165,19 +72,9 @@ public class Game : IUpdatable, ILoadable, IDrawable
         chest.CellPosition = new Vector2i(3,3);
         Globals.world.Add(chest);
 
-        // World
-
-        Globals.player = player;
-
         foreach (var obj in  Globals.world.Objects){
             obj.Load();
         }
-
-        // Set sprite offsets
-        var body = player.GetComponent<Sprite>();
-
-        if (body != null)
-            body.offset = new Vector2(0, -body.Texture.Height / 2);
 
         var chestMultiSprite = chest.GetComponent<MultiSprite>();
         if (chestMultiSprite != null && chestMultiSprite.CurrentSprite != null)
@@ -187,6 +84,10 @@ public class Game : IUpdatable, ILoadable, IDrawable
 
     public void LoadUI(){
 
+        var CharacterCreationMenu  = new CharacterCreationMenu();
+        CharacterCreationMenu.CenterScreen();
+        Globals.RootWidget.AddChild(CharacterCreationMenu);
+        
     }
 
     public void UnLoad(){
@@ -224,9 +125,10 @@ public class Game : IUpdatable, ILoadable, IDrawable
             DrawDebug = ! DrawDebug;
         }
 
+        Globals.Camera.Update(delta);
         Globals.RootWidget.Update(delta);
         Globals.world.Remove();
-        Globals.camera.Target = player.TotalPosition;
+        //Globals.camera.Target = player.TotalPosition;
     }
 
     public int Main()
@@ -248,7 +150,7 @@ public class Game : IUpdatable, ILoadable, IDrawable
                 ClearBackground(new Color(255,255,255,255));
 
                 // Draw fps
-                BeginMode2D(Globals.camera);
+                BeginMode2D(Globals.Camera.GetRaylibCamera());
                     Draw();
                 EndMode2D();
 

@@ -1,0 +1,128 @@
+[
+    {
+        "Name" : "Dwarf Long Hair 1",
+        "id" : "dwarf-long-hair1",
+        "tags" : ["hair"],
+
+        "components" : [
+            {
+                "className" : "Hair",
+                "parameters" : {
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 9,
+                            "Y" : 1
+                        },
+                        "dwarf" : {
+                            "X" : 10,
+                            "Y" : 0
+                        }
+                    },
+                    "spritePath" : "long-hair1.png",
+                    "racesId" : ["dwarf", "human", "orc"]
+
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "Dwarf-Long Hair 2",
+        "id" : "dwarf-long-hair2",
+        "tags" : ["hair"],
+
+        "components" : [
+            {
+                "className" : "Hair",
+                "parameters" : {
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 8,
+                            "Y" : 1
+                        },
+                        "dwarf" : {
+                            "X" : 9,
+                            "Y" : 0
+                        }
+                    },
+                    "spritePath" : "long-hair2.png",
+                    "racesId" : ["dwarf", "human", "orc"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "Dwarf Short hair",
+        "id" : "dwarf-short-hair",
+        "tags" : ["hair"],
+
+        "components" : [
+            {
+                "className" : "Hair",
+                "parameters" : {
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 10,
+                            "Y" : 2
+                        },
+                        "dwarf" : {
+                            "X" : 11,
+                            "Y" : 1
+                        }
+                    },
+                    "spritePath" : "short-hair1.png",
+                    "racesId" : ["dwarf", "human", "orc"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "Dwarf Short hair 2",
+        "id" : "dwarf-short-hair2",
+        "tags" : ["hair"],
+
+        "components" : [
+            {
+                "className" : "Hair",
+                "parameters" : {
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 10,
+                            "Y" : 1
+                        },
+                        "dwarf" : {
+                            "X" : 11,
+                            "Y" : 0
+                        }
+                    },
+                    "spritePath" : "short-hair2.png",
+                    "racesId" : ["dwarf", "human", "orc"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "Dwarf Short hair 3",
+        "id" : "dwarf-short-hair3",
+        "tags" : ["hair"],
+
+        "components" : [
+            {
+                "className" : "Hair",
+                "parameters" : {
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 9,
+                            "Y" : 0
+                        },
+                        "dwarf" : {
+                            "X" : 10,
+                            "Y" : -1
+                        }
+                    },
+                    "spritePath" : "short-hair3.png",
+                    "racesId" : ["dwarf", "human", "orc"]
+                }
+            }
+        ]
+    }
+]

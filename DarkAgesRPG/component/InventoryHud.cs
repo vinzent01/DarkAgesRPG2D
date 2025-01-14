@@ -10,7 +10,7 @@ public class InventoryHud : Component {
 
         if (Input.IsKeyPressed(Raylib_cs.KeyboardKey.I)){
 
-            if (!Globals.RootWidget.HasId("player inventory")){
+            if (!Globals.RootWidget.HasId("player inventory") && owner != null){
                 var  playerInventory = new InventoryWidget(owner);
                 playerInventory.id = "player inventory";
                 

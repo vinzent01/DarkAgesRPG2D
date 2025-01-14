@@ -1,0 +1,87 @@
+[
+    {
+        "Name" : "Elf Short Hair",
+        "id" : "elf-short-hair1",
+        "tags" : ["hair"],
+
+        "components" : [
+            {
+                "className" : "Hair",
+                "parameters" : {
+                    "spritePath" : "./short-hair.png",
+                    "racesOffsets" : {
+                        "elf" : {
+                            "X" : 10,
+                            "Y" : 1
+                        }
+                    },
+                    "racesId" : [ "elf"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "Elf Short Hair 2",
+        "id" : "elf-short-hair2",
+        "tags" : ["hair"],
+
+        "components" : [
+            {
+                "className" : "Hair",
+                "parameters" : {
+                    "spritePath" : "./short-hair2.png",
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 9,
+                            "Y" : 1
+                        }
+                    },
+                    "racesId" : [ "elf"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "Elf Medium Hair",
+        "id" : "elf-medium-hair",
+        "tags" : ["hair"],
+
+        "components" : [
+            {
+                "className" : "Hair",
+                "parameters" : {
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 7,
+                            "Y" : 1
+                        }
+                    },
+                    "spritePath" : "./medium-hair.png",
+                    "racesId" : [ "elf"]
+                }
+            }
+        ]
+    },
+
+    {
+        "Name" : "Elf Medium Hair 2",
+        "id" : "elf-medium-hair 2",
+        "tagss" : ["hair"],
+
+        "components" : [
+            {
+                "className" : "Hair",
+                "parameters" : {
+                    "spritePath" : "./medium-hair2.png",
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 10,
+                            "Y" : 10
+                        }
+                    },
+                    "racesId" : [ "elf"]
+                }
+            }
+        ]
+    }
+]

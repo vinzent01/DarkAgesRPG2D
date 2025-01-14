@@ -13,6 +13,7 @@ namespace DarkAgesRPG.Gui;
 
 public enum FlowDirections{
     Horizontal,
+    HorizontalRight,
     Vertical
 }
 
@@ -26,6 +27,20 @@ public struct Margin {
 public struct Grow {
     public bool growX;
     public bool growY;
+}
+
+public enum PositionOffset {
+    None,
+    Right,
+    Left,
+    top,
+    Bottom,
+    CenterHorizontal,
+    CenterVertical,
+    Center,
+    CenterBottom,
+    CenterRight,
+    CenterLeft
 }
 
 public class Widget {
@@ -52,6 +67,8 @@ public class Widget {
 
     public Margin margin;
     public Grow Grow { get; set; }
+    public PositionOffset PositionOffset;
+    public float RoundBorders;
 
     // Properties
     public string? id;
@@ -81,14 +98,53 @@ public class Widget {
     }
 
     public Vector2i GlobalPosition {
-        get {
+        get {    
+            var marginOffset = new Vector2i(0, 0);
+
             if (parent != null)
-                return 
-                    (   
-                        DragOffset + 
-                        parent.GlobalPosition + 
-                        new Vector2i(position.X + parentOffsetX + parent.margin.right, position.Y +parentOffsetY + parent.margin.left)
+                marginOffset = new Vector2i(parent.margin.left, parent.margin.top);
+            
+            if (parent != null && this.PositionOffset == PositionOffset.None){
+                var parentOffset = new Vector2i(parentOffsetX, parentOffsetY);
+
+                return DragOffset + parent.GlobalPosition + position +parentOffset +marginOffset;
+            }
+            else if (parent != null && this.PositionOffset != PositionOffset.None) {
+                var positionOffset = new Vector2i(0,0);
+                var parentOffset = new Vector2i(0,0);
+
+                if (this.PositionOffset == PositionOffset.CenterHorizontal ){
+                    positionOffset = new Vector2i(
+                        (parent.TotalSize.X / 2) - TotalSize.X / 2, 
+                        0
                     );
+
+                    parentOffset = new Vector2i(0, parentOffsetY);
+                }
+                else if (PositionOffset == PositionOffset.CenterBottom){
+                    positionOffset = new Vector2i((parent.TotalSize.X / 2) - TotalSize.X / 2, parent.TotalSize.Y - TotalSize.Y);
+                    parentOffset = new Vector2i(0, 0);
+                }
+                else if (PositionOffset == PositionOffset.CenterLeft){
+                    positionOffset = new Vector2i(0, parent.TotalSize.Y /2 - TotalSize.Y /2);
+                    parentOffset = new Vector2i(0, 0);
+                }
+                else if (PositionOffset == PositionOffset.CenterRight){
+                    positionOffset = new Vector2i(parent.TotalSize.X - TotalSize.X, parent.TotalSize.Y /2 - TotalSize.Y /2);
+                    parentOffset = new Vector2i(0, 0);
+                }
+                else if (PositionOffset == PositionOffset.Right){
+                    positionOffset = new Vector2i(parent.TotalSize.X - TotalSize.X - (parent.margin.right + parent.margin.left), 0);
+                    parentOffset = new Vector2i(0, parentOffsetY);
+                }
+
+                return (
+                    parent.GlobalPosition +
+                    positionOffset +
+                    parentOffset +
+                    marginOffset
+                );
+            }
 
             return DragOffset + position;
         }
@@ -119,6 +175,7 @@ public class Widget {
         DoMouseCollision = true;
         DragOffset = new Vector2i(0,0);
         IsContainer = false;
+        PositionOffset = PositionOffset.None;
     }
     
     public void Update(float delta)
@@ -131,6 +188,7 @@ public class Widget {
 
         UpdateChildren(delta);
         HandleInteractions(delta);
+        GrowWidget();
         OnUpdate(delta);
     }
 
@@ -146,6 +204,15 @@ public class Widget {
         foreach (var child in Childrens.ToList())
         {
             child.Update(delta);
+        }
+    }
+
+    private void GrowWidget(){
+        if (Grow.growX == true && parent != null){
+            this.TotalSize = new Vector2i(parent.TotalSize.X, TotalSize.Y);
+        }
+        if (Grow.growY == true && parent != null){
+            this.TotalSize = new Vector2i(TotalSize.X, parent.TotalSize.Y);
         }
     }
 
@@ -280,12 +347,20 @@ public class Widget {
 
     }
 
+    public void Click(){
+        OnClick();
+    }
+
     public void DrawHud(){
-        Raylib.DrawRectangle(
-            GlobalPosition.X, 
-            GlobalPosition.Y,
-            TotalSize.X,
-            TotalSize.Y, 
+        Raylib.DrawRectangleRounded(
+            new Rectangle(
+                GlobalPosition.X, 
+                GlobalPosition.Y,
+                TotalSize.X,
+                TotalSize.Y
+            ),
+            this.RoundBorders,
+            1,
             backgroundColor
         );
 
@@ -377,7 +452,7 @@ public class Widget {
     }
 
 
-    public void SetFontSizeSize(string text, int font){
+    public void SetWidgetSize(string text, int font){
         this.fontSize = font;
         this.Size.Y = this.fontSize;
         this.Size.X = Raylib.MeasureText(text, this.fontSize);
@@ -386,7 +461,7 @@ public class Widget {
     public void FitContent() {
         Vector2i FitSize = new Vector2i(0, 0);
 
-        if (flowDirection == FlowDirections.Vertical) {
+        if (flowDirection == FlowDirections.Vertical && PositionOffset == PositionOffset.None) {
             int maxX = 0;
 
             foreach (var child in Childrens) {
@@ -399,7 +474,7 @@ public class Widget {
                 FitSize.Y = Math.Max(0, FitSize.Y - gap);
 
             FitSize.X = maxX;
-        } else {
+        } else if (PositionOffset == PositionOffset.None) {
             int maxY = 0;
 
             foreach (var child in Childrens) {
@@ -425,49 +500,16 @@ public class Widget {
         );
     }
 
-    public void AddChild(Widget widget){
-        if (HasChild(widget)){
-            return;
-        }
 
-
-        Childrens.Add(widget);
-        widget.parent = this;
-
-        if (DoFlow){
+    public void AddWidgetSize(Widget widget){
+        if (DoFlow && PositionOffset == PositionOffset.None){
             if (flowDirection == FlowDirections.Vertical){
                 widget.parentOffsetY = totalOffsetY;
                 totalOffsetY += (int)widget.TotalSize.Y + gap;
             }
-            else {
+            else if (flowDirection == FlowDirections.Horizontal) {
                 widget.parentOffsetX = totalOffsetX;
                 totalOffsetX += (int)widget.TotalSize.X + gap;
-            }
-
-            FitContent();
-        }
-    }
-
-    public bool HasChild(Widget widget){
-        foreach (var child in Childrens){
-            if (child == widget)
-                return true;
-        }
-        return false;
-    }
-
-    public void RemoveChild(Widget widget){
-        if (!HasChild(widget)){
-            return;
-        }
-
-        Childrens.Remove(widget);
-        widget.parent = null;
-
-        if (DoFlow){
-            if (flowDirection == FlowDirections.Vertical){
-                widget.parentOffsetY = totalOffsetY;
-                totalOffsetY -= (int)widget.TotalSize.Y + gap;
             }
             else {
                 widget.parentOffsetX = totalOffsetX;
@@ -478,10 +520,69 @@ public class Widget {
         }
     }
 
+    public void RemoveWidgetSize(Widget widget){
+        if (DoFlow && PositionOffset == PositionOffset.None){
+            if (flowDirection == FlowDirections.Vertical){
+                widget.parentOffsetY = totalOffsetY;
+                totalOffsetY -= (int)widget.TotalSize.Y + gap;
+            }
+            else if (flowDirection == FlowDirections.Horizontal){
+                widget.parentOffsetX = totalOffsetX;
+                totalOffsetX -= (int)widget.TotalSize.X + gap;
+            }
+            else {
+                widget.parentOffsetX = totalOffsetX;
+                totalOffsetX += (int)widget.TotalSize.X + gap;
+            }
+
+            FitContent();
+        }
+    }
+
+    public void UpdatePositions(){
+        totalOffsetX = 0;
+        totalOffsetY = 0;
+
+        foreach (var child in Childrens){
+            AddWidgetSize(child);
+        }
+    }
+
+    public void AddChild(Widget widget){
+        if (HasChild(widget)){
+            return;
+        }
+
+
+        Childrens.Add(widget);
+        widget.parent = this;
+        AddWidgetSize(widget);
+
+    }
+
+    public void RemoveChild(Widget widget){
+        if (!HasChild(widget)){
+            return;
+        }
+
+        Childrens.Remove(widget);
+        widget.parent = null;
+        RemoveWidgetSize(widget);
+    }
+
     public void RemoveAllChild(){
         foreach (var child in Childrens.ToList()){
             RemoveChild(child);
         }
+    }
+
+
+    public bool HasChild(Widget widget){
+        foreach (var child in Childrens){
+            if (child == widget)
+                return true;
+        }
+        return false;
     }
 
     public RootWidget? GetRoot()

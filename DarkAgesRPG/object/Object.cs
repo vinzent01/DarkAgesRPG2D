@@ -1,6 +1,4 @@
 using System.Numerics;
-using System.Reflection.Metadata;
-using Raylib_cs;
 
 namespace DarkAgesRPG;
 
@@ -9,6 +7,47 @@ public class Object : IDrawable, ILoadable, IUpdatable{
 
     public bool IsVisible;
     protected int zIndex = 0;
+    private Vector2 scale;
+    private Vector2 offset;
+    public Vector2 flipOffset;
+    public Vector2 Offset{
+        get {
+            if (isFlipped){
+                if (Parent != null){
+                    return Parent.flipOffset + flipOffset;
+                }
+                return flipOffset;
+            }
+            else {
+                if (Parent != null){
+                    return Parent.Offset + offset;
+                }
+                return offset;
+            }
+        }
+        set {
+            offset = value;
+        }
+    }
+
+
+    private bool isFlipped;
+    public bool IsFlipped {
+        get {
+            return isFlipped;
+        }
+    }
+
+    public Vector2 Scale {
+        get {
+            if (Parent != null)
+                return Parent.scale * scale;
+            return scale;
+        }
+        set {
+            scale = value;
+        }
+    }
 
     public int TotalZ {
         get {
@@ -69,6 +108,7 @@ public class Object : IDrawable, ILoadable, IUpdatable{
         Children = new();
         Components = new();
         IsVisible = true;
+        Scale = new Vector2(1,1);
     }
 
     public Object(string name, string id, params Component[] components){
@@ -78,6 +118,7 @@ public class Object : IDrawable, ILoadable, IUpdatable{
         Components = new();
         Children = new();
         IsVisible = true;
+        Scale = new Vector2(1,1);
 
         foreach (var component in components){
             AddComponent(component);
@@ -135,6 +176,23 @@ public class Object : IDrawable, ILoadable, IUpdatable{
         }
         return false;
     }
+    public bool HasChildId(string id){
+        foreach (var c in Children){
+            if (id == c.id){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Object? GetChildId(string id){
+        foreach (var c in Children){
+            if (c.id == id){
+                return c;
+            }
+        }
+        return null;
+    }
 
     public void AddChild(Object obj){
         if (HasChild(obj))
@@ -186,5 +244,28 @@ public class Object : IDrawable, ILoadable, IUpdatable{
         foreach (var c in Components){
             c.Update(delta);
         }
+    }
+
+    public void Flip(bool direction)
+    {
+        HashSet<Object> visited = new HashSet<Object>();
+
+        void FlipRecursive(Object currentObj, bool flipped)
+        {
+            if (visited.Contains(currentObj)) return; // Evita ciclos
+
+            visited.Add(currentObj);
+
+            currentObj.isFlipped = flipped;
+
+            // Recursively flip all children
+            foreach (var child in currentObj.Children)
+            {
+                FlipRecursive(child, flipped);
+            }
+        }
+
+        isFlipped = direction;
+        FlipRecursive(this, direction);
     }
 }

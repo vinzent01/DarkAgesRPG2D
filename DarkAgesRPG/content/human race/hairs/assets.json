@@ -1,0 +1,152 @@
+[
+    {
+        "Name" : "human short hair",
+        "id" : "short-hair",
+        "tags" : [ "hair"],
+
+        "components" : [
+            {
+                "className" : "Hair",
+                "parameters" : {
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 9,
+                            "Y" : 0
+                        },
+                        "dwarf" : {
+                            "X" : 10,
+                            "Y" : -1
+                        }
+                    },
+                    "spritePath" : "./short-hair2.png",
+                    "racesId" : ["dwarf", "human", "orc", "dwarf"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "human medium hair",
+        "id" : "human-medium-hair",
+        "tags" : [ "hair"],
+
+        "components" : [
+            {
+                "className" : "Hair",
+                "parameters" : {
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 8,
+                            "Y" : 0
+                        },
+                        "dwarf" : {
+                            "X" : 9,
+                            "Y" : -1
+                        }
+                    },
+                    "spritePath" : "./medium-hair.png",
+                    "racesId" : ["dwarf", "human", "orc", "dwarf"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "human medium hair 2",
+        "id" : "human-medium-hair 2",
+        "tags" : [ "hair"],
+
+        "components" : [
+            {
+                "className" : "Hair",
+                "parameters" : {
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 10,
+                            "Y" : -1
+                        },
+                        "dwarf" : {
+                            "X" : 11,
+                            "Y" : -2
+                        }
+                    },
+                    "spritePath" : "./medium-hair2.png",
+                    "racesId" : ["dwarf", "human", "orc", "dwarf"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "human samurai hair",
+        "id" : "human-samurai-hair",
+        "tags" : [ "hair"],
+
+        "components" : [
+            {
+                "className" : "Hair",
+                "parameters" : {
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 7,
+                            "Y" : -2
+                        },
+                        "dwarf" : {
+                            "X" : 8,
+                            "Y" : -3
+                        }
+                    },
+                    "spritePath" : "./samurai-hair.png",
+                    "racesId" : ["dwarf", "human", "orc", "dwarf"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "human samurai hair 2",
+        "id" : "human-samurai-hair-2",
+        "tags" : [ "hair"],
+
+        "components" : [
+            {
+                "className" : "Hair",
+                "parameters" : {
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 7,
+                            "Y" : -2
+                        },
+                        "dwarf" : {
+                            "X" : 8,
+                            "Y" : -3
+                        }
+                    },
+                    "spritePath" : "./samurai-hair2.png",
+                    "racesId" : ["dwarf", "human", "orc", "dwarf"]
+                }
+            }
+        ]
+    },
+    {
+        "Name" : "human samurai hair 3",
+        "id" : "human-samurai-hair-3",
+        "tags" : [ "hair"],
+
+        "components" : [
+            {
+                "className" : "Hair",
+                "parameters" : {
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 8,
+                            "Y" : -2
+                        },
+                        "dwarf" : {
+                            "X" : 9,
+                            "Y" : -3
+                        }
+                    },
+                    "spritePath" : "./samurai-hair3.png",
+                    "racesId" : ["dwarf", "human", "orc", "dwarf"]
+                }
+            }
+        ]
+    }
+]

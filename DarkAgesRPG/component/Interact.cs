@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Numerics;
+using CSScripting;
 using DarkAgesRPG.Gui;
 using Raylib_cs;
 using static Raylib_cs.Raylib;
@@ -20,6 +21,10 @@ public class InteractComponent : Component {
         if (owner.IsVisible == false)
             return;
 
+        if (Globals.player == null){
+            return;
+        }
+
         var SpriteComponent = owner.GetComponent<Sprite>();
         var multispriteComponent = owner.GetComponent<MultiSprite>();
 
@@ -29,7 +34,7 @@ public class InteractComponent : Component {
         );
 
         Vector2 mouse =Raylib.GetMousePosition();
-        Vector2 mouseWorld = Raylib.GetScreenToWorld2D(mouse, Globals.camera);
+        Vector2 mouseWorld = Raylib.GetScreenToWorld2D(mouse, Globals.Camera.GetRaylibCamera());
 
         Sprite CollisionSprite;
 
@@ -39,6 +44,7 @@ public class InteractComponent : Component {
             CollisionSprite = multispriteComponent.CurrentSprite;
 
         if (
+            CollisionSprite != null &&
             CollisionSprite.Contains(mouseWorld) && 
             IsMouseButtonPressed(MouseButton.Left) && 
             Globals.RootWidget.GetContainerWidgetOnMouse() == null
