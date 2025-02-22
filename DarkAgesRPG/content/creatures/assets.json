@@ -1,0 +1,119 @@
+[
+    {
+        "name" : "Wolf",
+        "id" : "wolf",
+        "tags" : [ "creature", "animal"],
+        "type" : "Actor",
+
+
+        "components" : [
+            {
+                "className" : "Sprite",
+                "parameters" : {
+                    "path" : "./wolf.png"
+                }
+            }
+        ]
+
+    },
+    {
+        "name" : "Deer",
+        "id" : "deer",
+        "tags" : [ "creature", "animal"],
+        "type" : "Actor",
+
+
+        "components" : [
+            {
+                "className" : "Sprite",
+                "parameters" : {
+                    "path" : "./deer.png"
+                }
+            }
+        ]
+
+    },
+    {
+        "name" : "Bear",
+        "id" : "bear",
+        "tags" : [ "creature", "animal"],
+        "type" : "Actor",
+
+
+        "components" : [
+            {
+                "className" : "Sprite",
+                "parameters" : {
+                    "path" : "./bear.png"
+                }
+            }
+        ]
+
+    },
+    {
+        "name" : "Horse",
+        "id" : "horse",
+        "tags" : [ "creature", "animal"],
+        "type" : "Actor",
+
+
+        "components" : [
+            {
+                "className" : "Sprite",
+                "parameters" : {
+                    "path" : "./horse.png"
+                }
+            }
+        ]
+
+    },
+    {
+        "name" : "White Horse",
+        "id" : "white-horse",
+        "tags" : [ "creature", "animal"],
+        "type" : "Actor",
+
+
+        "components" : [
+            {
+                "className" : "Sprite",
+                "parameters" : {
+                    "path" : "./white-horse.png"
+                }
+            }
+        ]
+
+    },
+    {
+        "name" : "Griffon",
+        "id" : "griffon",
+        "tags" : [ "creature", "animal"],
+        "type" : "Actor",
+
+
+        "components" : [
+            {
+                "className" : "Sprite",
+                "parameters" : {
+                    "path" : "./griffon.png"
+                }
+            }
+        ]
+    },
+    {
+        "name" : "rabbit",
+        "id" : "rabbit",
+        "tags" : [ "creature", "animal"],
+        "type" : "Actor",
+
+
+        "components" : [
+            {
+                "className" : "Sprite",
+                "parameters" : {
+                    "path" : "./rabbit.png"
+                }
+            }
+        ]
+    }
+]

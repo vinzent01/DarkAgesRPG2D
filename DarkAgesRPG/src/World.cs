@@ -1,0 +1,90 @@
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
+namespace DarkAgesRPG;
+
+public class World {
+    public List<Object> Objects;
+    private List<Object> ObjectsToRemove;
+    private List<List<Action>> ActionsPools;
+
+    public World(){
+        Objects = new();
+        ObjectsToRemove = new();
+        ActionsPools = new();
+    }
+
+    public void UpdateObjects(float delta){
+        // update objects
+        foreach (var obj in  State.world.Objects.ToList()){
+            obj.Update(delta);
+        }
+    }
+
+    public void ConsumeActions(float delta)
+    {
+        if (ActionsPools.Count > 0){
+            var currentActionPool = ActionsPools[0];
+
+            if (currentActionPool.Count > 0){
+                var currentAction = currentActionPool[0];
+                var isEnded = currentAction.Update(delta);
+
+                if (isEnded){
+                    currentActionPool.Remove(currentAction);
+                }
+            }
+        }
+    }
+
+    public void Add(Object obj){
+        Objects.Add(obj);
+    }
+
+    public List<Object> Get(Vector2i position){
+        List<Object> returnObjects = new ();
+
+        foreach (var obj in Objects){
+            if (obj.CellPosition == position){
+                returnObjects.Add(obj);
+            }
+        }
+
+        return returnObjects;
+    }
+
+    public void ToRemove(Vector2i position){
+        List<Object> objs = Get(position);
+
+        foreach (var obj in objs)
+            ObjectsToRemove.Add(obj);
+    }
+    public void ToRemove(Object obj){
+        ObjectsToRemove.Add(obj);
+    }
+
+    public void Remove(){
+        foreach (var obj in ObjectsToRemove.ToList()){
+            Objects.Remove(obj);
+            ObjectsToRemove.Remove(obj);
+        }
+    }
+
+    public static List<Object> SortObjectsByPosition(List<Object> objects) {
+
+        return objects
+            .OrderBy(obj =>  { 
+                var sprite = obj.GetComponent<Sprite>(); 
+                float yPosition = obj.TotalPosition.Y;
+                float zOrder = obj.TotalZ;
+
+                // Se o objeto tiver um sprite, considere a altura para calcular a ordenação.
+                if (sprite != null)
+                {
+                    yPosition += obj.Offset.Y + sprite.Height;
+                }
+
+                return yPosition + zOrder;
+            })
+            .ToList();
+    }
+}

@@ -17,5 +17,7 @@
 - [X] Criar widget de inventário
     - [X] criar drag and drop de items em diferentes inventários
     - [X] Ao jogar multiplos items no chão criar um stack de items interagivel
-    - [ ] estacar stacks identicos
+    - [X] estacar stacks identicos
+
+- [ ] Sistema de turnos
 
