@@ -39,6 +39,7 @@ public class Object : IDrawable, ILoadable, IUpdatable{
             return isFlipped;
         }
     }
+    public bool DoDrawDebug;
 
     public Vector2 Scale {
         get {
@@ -106,8 +107,6 @@ public class Object : IDrawable, ILoadable, IUpdatable{
     public List<Object> Children;
     public List<Component> Components;
 
-
-
     public Object(){
         Name = "none";
         id = "none";
@@ -116,6 +115,7 @@ public class Object : IDrawable, ILoadable, IUpdatable{
         IsVisible = true;
         Scale = new Vector2(1,1);
         CellPositions = new();
+        DoDrawDebug = true;
 
     }
 
@@ -249,7 +249,7 @@ public class Object : IDrawable, ILoadable, IUpdatable{
         if (!IsVisible)
             return;
 
-        if (State.Config.DrawDebug){
+        if (State.Config.DrawDebug && DoDrawDebug){
             Raylib.DrawRectangleLines(
                 CellPosition.X * State.Config.TileSize, 
                 CellPosition.Y * State.Config.TileSize, 

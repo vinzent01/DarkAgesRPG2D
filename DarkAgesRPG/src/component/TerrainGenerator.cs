@@ -42,6 +42,7 @@ public class TerrainGenerator : Component{
                     grassTileObj.Load();
                     grassTileObj.IsVisible = true;
                     grassTileObj.CellPosition = new Vector2i(x,y);
+                    grassTileObj.DoDrawDebug = false;
 
                     Tiles.Add(grassTileObj);
                 }
@@ -51,6 +52,7 @@ public class TerrainGenerator : Component{
                     grassObj.Load();
                     grassObj.IsVisible = true;
                     grassObj.CellPosition = new Vector2i(x,y);
+                    grassObj.DoDrawDebug = false;
 
                     Tiles.Add(grassObj);
                 }

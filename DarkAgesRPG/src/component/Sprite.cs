@@ -96,7 +96,7 @@ public class Sprite : Component {
                 Color
             );
 
-            if (State.Config.DrawDebug){
+            if (State.Config.DrawDebug && owner.DoDrawDebug){
                 DrawRectangleLines(
                     (int)(owner.TotalPosition.X + (int)totalOffset.X * owner.Scale.X), 
                     (int)(owner.TotalPosition.Y + (int)totalOffset.Y * owner.Scale.Y), 
