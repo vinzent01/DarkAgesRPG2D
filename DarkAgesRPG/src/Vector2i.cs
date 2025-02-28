@@ -30,6 +30,13 @@ public struct Vector2i
     }
 
 
+    public static float Distance(Vector2i v1, Vector2i v2)
+    {
+        int dx = v2.X - v1.X;
+        int dy = v2.Y - v1.Y;
+        return (float)Math.Sqrt(dx * dx + dy * dy);
+    }
+
     public static  bool operator == ( Vector2i a, Vector2i b){
         return a.Equals(b);
     }

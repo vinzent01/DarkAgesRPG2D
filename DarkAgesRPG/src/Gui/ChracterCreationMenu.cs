@@ -291,7 +291,7 @@ public class CharacterCreationMenu : Widget {
             Character.Load();
             Character.CellPosition = new Vector2i(0,0);
 
-            State.world.Add(Character);
+            State.world.AddChild(Character);
             State.Camera.target = Character;
             State.player = Character;
 

@@ -1,0 +1,137 @@
+[
+    {
+        "name" : "Grass Tile",
+        "id" : "grass-tile",
+        "tags" : [ "vegetation", "tile"],
+        "type" : "Object",
+
+        "components" : [
+            {
+                "className" : "Sprite",
+                "parameters" : {
+                    "path" : "./Grass.png"
+                }
+            }
+        ]
+    },
+    {
+        "name" : "Grass",
+        "id" : "grass-object",
+        "tags" : [ "vegetation"],
+        "type" : "Object",
+
+        "components" : [
+            {
+                "className" : "Sprite",
+                "parameters" : {
+                    "path" : "./grass-object.png"
+                }
+            }
+        ]
+    },
+    {
+        "name" : "Dirt tile",
+        "id" : "dirt-tile",
+        "tags" : [ "vegetation", "tile"],
+        "type" : "Object",
+
+        "components" : [
+            {
+                "className" : "Sprite",
+                "parameters" : {
+                    "path" : "./dirt.png"
+                }
+            }
+        ]
+    },
+    {
+        "name" : "Sand tile",
+        "id" : "sand-tile",
+        "tags" : [ "vegetation", "tile"],
+        "type" : "Object",
+
+        "components" : [
+            {
+                "className" : "Sprite",
+                "parameters" : {
+                    "path" : "./sand.png"
+                }
+            }
+        ]
+    },
+    {
+        "name" : "Cyan bush",
+        "id" : "cyan-bush",
+        "tags" : [ "vegetation"],
+        "type" : "Object",
+
+        "components" : [
+            {
+                "className" : "Sprite",
+                "parameters" : {
+                    "path" : "./cyan-bush-flower.png"
+                }
+            }
+        ]
+    },
+    {
+        "name" : "Purple bush",
+        "id" : "purple-bush",
+        "tags" : [ "vegetation"],
+        "type" : "Object",
+
+        "components" : [
+            {
+                "className" : "Sprite",
+                "parameters" : {
+                    "path" : "./purple-bush-flower.png"
+                }
+            }
+        ]
+    },
+    {
+        "name" : "Pine Tree",
+        "id" : "pine-tree",
+        "tags" : [ "vegetation", "tree"],
+        "type" : "Object",
+
+        "components" : [
+            {
+                "className" : "Sprite",
+                "parameters" : {
+                    "path" : "./pine-tree.png"
+                }
+            }
+        ]
+    },
+    {
+        "name" : "Purple Flower",
+        "id" : "purple-flower",
+        "tags" : [ "vegetation"],
+        "type" : "Object",
+
+        "components" : [
+            {
+                "className" : "Sprite",
+                "parameters" : {
+                    "path" : "./purple-flower.png"
+                }
+            }
+        ]
+    },
+    {
+        "name" : "white flower",
+        "id" : "white-flower",
+        "tags" : [ "vegetation"],
+        "type" : "Object",
+
+        "components" : [
+            {
+                "className" : "Sprite",
+                "parameters" : {
+                    "path" : "./white-flower.png"
+                }
+            }
+        ]
+    }
+]

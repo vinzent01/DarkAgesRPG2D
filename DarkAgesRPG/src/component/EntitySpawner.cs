@@ -54,9 +54,9 @@ public class EntitySpawner : Component {
 
 
         
-        State.world.Add(entityInstance);
+        State.world.AddChild(entityInstance);
 
-        if (State.world.Objects.Count > maxCreatures){
+        if (State.world.Children.Count > maxCreatures){
             spawnTimer.Stop();
         }
     }

@@ -28,7 +28,6 @@ public static class State{
 
 public class Game : IUpdatable, ILoadable, IDrawable
 {
-    Object player;
 
     public Game(){
         // Initialization
@@ -67,6 +66,14 @@ public class Game : IUpdatable, ILoadable, IDrawable
 
         State.Config.isTurnEnabled = false;
 
+        var terrain = new Object(
+            "terrain",
+            "terrain",
+            new TerrainGenerator(100,100)
+        );
+
+        State.world.AddChild(terrain);
+
         // chest
         var chest = new Object(
             "chest", 
@@ -104,7 +111,7 @@ public class Game : IUpdatable, ILoadable, IDrawable
         }
 
         chest.CellPosition = new Vector2i(3,3);
-        State.world.Add(chest);
+        State.world.AddChild(chest);
 
         // test horse
         var horse = new Actor(
@@ -118,12 +125,11 @@ public class Game : IUpdatable, ILoadable, IDrawable
         horse.Flip(true);
         horse.CellPosition = new Vector2i(2,2);
 
-        State.world.Add(horse);
+        State.world.AddChild(horse);
 
-        /// load 
-        foreach (var obj in  State.world.Objects.ToList()){
-            obj.Load();
-        }
+
+
+        State.world.Load();
 
         var chestMultiSprite = chest.GetComponent<MultiSprite>();
         if (chestMultiSprite != null && chestMultiSprite.CurrentSprite != null)
@@ -133,22 +139,19 @@ public class Game : IUpdatable, ILoadable, IDrawable
 
 
     public void UnLoad(){
-        foreach (var obj in State.world.Objects){
-            obj.UnLoad();
-        }
+        State.world.UnLoad();
     }
 
     public void Draw(){
         // Draw cells
+        
         for (var x = 0; x < 100; x++){
             for (var y = 0; y < 100; y++){
                 DrawRectangleLines(x * 32,y * 32, 32, 32, new Color(150,150,150,255));
             }
         }
-        
-        foreach (var obj in  World.SortObjectsByPosition(State.world.Objects)){
-            obj.Draw();
-        }
+
+        State.world.Draw();
     }
 
     public void DrawHUD(){
@@ -173,7 +176,7 @@ public class Game : IUpdatable, ILoadable, IDrawable
             State.Config.DrawDebug = ! State.Config.DrawDebug;
         }
 
-        State.world.UpdateObjects(delta);
+        State.world.Update(delta);
 
         if (State.Config.isTurnEnabled){
             State.turnSystem.UpdateTurn(delta);

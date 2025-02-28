@@ -216,14 +216,15 @@ public class Object : IDrawable, ILoadable, IUpdatable{
     }
 
     public void Load(){
+        
+        foreach (var c in Children){
+            c.Load();
+        }
 
         foreach (var c in Components){
             c.Load();
         }
 
-        foreach (var c in Children){
-            c.Load();
-        }
 
         OnLoad();
     }
@@ -231,6 +232,11 @@ public class Object : IDrawable, ILoadable, IUpdatable{
     public void UnLoad(){
 
         foreach (var c in Children){
+            c.UnLoad();
+        }
+
+
+        foreach (var c in Components){
             c.UnLoad();
         }
 
@@ -260,19 +266,25 @@ public class Object : IDrawable, ILoadable, IUpdatable{
                 );  
             }
         }
+        
+        foreach (var c in World.SortObjectsByPosition(Children)){
+            c.Draw();
+        }
 
         foreach (var c in Components){
             c.Draw();
         }
 
-        foreach (var c in World.SortObjectsByPosition(Children)){
-            c.Draw();
-        }
 
         OnDraw();
     }
 
     public void Update(float delta){
+        foreach (var c in Children){
+            c.Update(delta);
+        }
+
+
         foreach (var c in Components){
             c.Update(delta);
         }

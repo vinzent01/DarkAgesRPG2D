@@ -52,7 +52,7 @@ public class DropItemAction : Action {
             itemStackObject.IsVisible = true;
             itemStackObject.Load();
 
-            State.world.Add(itemStackObject);
+            State.world.AddChild(itemStackObject);
             return true;
         }
         else {
@@ -75,14 +75,14 @@ public class DropItemAction : Action {
                 itemStackObject.IsVisible = true;
                 itemStackObject.Load();
 
-                State.world.Add(itemStackObject);
+                State.world.AddChild(itemStackObject);
                 return true;
             }
 
             // Se houver apenas um item, reposiciona e torna visível
             target.CellPosition = obj.CellPosition;
             target.IsVisible = true;
-            State.world.Add(target);
+            State.world.AddChild(target);
             return true;
         }
     }

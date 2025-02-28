@@ -13,6 +13,8 @@ public class Sprite : Component {
     public Color Color;
     public Vector2 offset;
     public Vector2 Origin;
+    public float YsortOffset;
+
 
     public int Width {
         get {
@@ -34,6 +36,20 @@ public class Sprite : Component {
         Color = new Color(255,255,255,255);
         TexturePath = texturePath;
     }
+
+    public Sprite(string texturePath, Vector2 Scale, Vector2 Offset){
+        Color = new Color(255,255,255,255);
+        TexturePath = texturePath;
+        this.offset = Offset;
+    }
+
+    public Sprite(string texturePath, Vector2 Scale, Vector2 Offset, float YsortOffset){
+        Color = new Color(255,255,255,255);
+        TexturePath = texturePath;
+        this.offset = Offset;
+        this.YsortOffset = YsortOffset;
+    }
+
 
     public override void Load(){
         Debug.Assert(File.Exists(TexturePath));

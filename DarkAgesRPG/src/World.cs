@@ -2,21 +2,26 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace DarkAgesRPG;
 
-public class World {
-    public List<Object> Objects;
+public class World : Object {
     private List<Object> ObjectsToRemove;
     private List<List<Action>> ActionsPools;
 
     public World(){
-        Objects = new();
         ObjectsToRemove = new();
         ActionsPools = new();
     }
 
-    public void UpdateObjects(float delta){
+    protected override void OnUpdate(float delta){
         // update objects
-        foreach (var obj in  State.world.Objects.ToList()){
+        foreach (var obj in Children){
             obj.Update(delta);
+        }
+    }
+
+    protected override void OnDraw()
+    {
+        foreach (var obj in  SortObjectsByPosition(Children)){
+            obj.Draw();
         }
     }
 
@@ -36,14 +41,10 @@ public class World {
         }
     }
 
-    public void Add(Object obj){
-        Objects.Add(obj);
-    }
-
     public List<Object> Get(Vector2i position){
         List<Object> returnObjects = new ();
 
-        foreach (var obj in Objects){
+        foreach (var obj in Children){
             if (obj.CellPosition == position){
                 returnObjects.Add(obj);
             }
@@ -64,7 +65,7 @@ public class World {
 
     public void Remove(){
         foreach (var obj in ObjectsToRemove.ToList()){
-            Objects.Remove(obj);
+            Children.Remove(obj);
             ObjectsToRemove.Remove(obj);
         }
     }
@@ -81,6 +82,7 @@ public class World {
                 if (sprite != null)
                 {
                     yPosition += obj.Offset.Y + sprite.Height;
+                    yPosition += sprite.YsortOffset;
                 }
 
                 return yPosition + zOrder;

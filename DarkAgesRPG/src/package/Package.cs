@@ -99,9 +99,38 @@ public class Asset {
                 break;
 
                 case "Sprite":
+
+                    parameters.TryGetValue("Offset", out var offsetparameter );
+                    parameters.TryGetValue("ysortOffset", out var ysortparameter);
+
+                    
+
+                    Vector2 offset;
+                    float ysort;
+
+                    if (offsetparameter == null){
+                        offset = new Vector2(0,0);
+                    }
+                    else {
+                        offset = (offsetparameter as JObject).ToObject<Vector2>();
+                    }
+
+                    if (ysortparameter == null){
+                        ysort = 0.0f;
+                    }
+                    else {
+                        ysort = (float)(double)ysortparameter;
+                    }
+
                     Object.AddComponent(
-                        new Sprite(Path.Join(assetDirectory, (string)parameters["path"]))
+                        new Sprite(
+                            Path.Join(assetDirectory, (string)parameters["path"]), 
+                            new Vector2(1,1),
+                            offset,
+                            ysort
+                        )
                     );
+
                 break;
 
                 case "Equipment":

@@ -19,7 +19,7 @@ public class TurnSystem
             turnQueue.Enqueue(State.player);
         }
 
-        foreach (var obj in State.world.Objects){
+        foreach (var obj in State.world.Children){
             if (obj is Actor actor && actor != State.player){
                 turnQueue.Enqueue(actor);
             }
@@ -99,7 +99,7 @@ public class NoTurnSystem{
 
     public void UpdateTurn(float delta){
 
-        foreach (var actor in State.world.Objects.OfType<Actor>() ){
+        foreach (var actor in State.world.Children.OfType<Actor>() ){
             if (actor.CurrentAction == null){
                 if (turntime > State.Config.NPCTurnTime){
                     turntime = 0;
