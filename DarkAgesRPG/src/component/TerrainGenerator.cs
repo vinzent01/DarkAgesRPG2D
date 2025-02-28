@@ -15,8 +15,12 @@ public class TerrainGenerator : Component{
     }
 
     public override void Draw(){
+
         foreach (var tile in Tiles){
-            tile.Draw();
+
+            if (State.Camera.IsInsideCameraView(tile)){
+                tile.Draw();
+            }
         }
     }
     

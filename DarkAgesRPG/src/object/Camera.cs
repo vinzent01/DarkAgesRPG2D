@@ -29,6 +29,31 @@ public class Camera : Object {
 
     }
 
+    public bool IsInsideCameraView(Object obj)
+    {
+        int screenWidth = Raylib.GetScreenWidth();
+        int screenHeight = Raylib.GetScreenHeight();
+
+        Vector2 cameraPosition = camera.Target - new Vector2(screenWidth / (2 * camera.Zoom), screenHeight / (2 * camera.Zoom));
+
+        var sprite = obj.GetComponent<Sprite>();
+        if (sprite == null) return false;
+
+        Vector2 objPos = obj.TotalPosition;
+        float objWidth = sprite.Width;
+        float objHeight = sprite.Height;
+
+        // Verifica se qualquer parte do sprite está dentro da área visível
+        bool isInside =
+            objPos.X + objWidth > cameraPosition.X &&
+            objPos.X < cameraPosition.X + (screenWidth / camera.Zoom) &&
+            objPos.Y + objHeight > cameraPosition.Y &&
+            objPos.Y < cameraPosition.Y + (screenHeight / camera.Zoom);
+
+        return isInside;
+    }
+
+
 
 
 }
