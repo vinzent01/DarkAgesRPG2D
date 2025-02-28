@@ -6,12 +6,20 @@ namespace DarkAgesRPG;
 public class TerrainGenerator : Component{
     Vector2i Size;
     Random rng;
+    List<Object> Tiles;
 
     public TerrainGenerator(int width, int height){
         Size = new Vector2i(width, height);
         rng = new Random();
+        Tiles = new();
     }
 
+    public override void Draw(){
+        foreach (var tile in Tiles){
+            tile.Draw();
+        }
+    }
+    
     public override void Load(){
         if (owner == null)
             return;
@@ -31,7 +39,7 @@ public class TerrainGenerator : Component{
                     grassTileObj.IsVisible = true;
                     grassTileObj.CellPosition = new Vector2i(x,y);
 
-                    owner.AddChild(grassTileObj);
+                    Tiles.Add(grassTileObj);
                 }
 
                 if (grassObjAsset != null){
@@ -40,9 +48,8 @@ public class TerrainGenerator : Component{
                     grassObj.IsVisible = true;
                     grassObj.CellPosition = new Vector2i(x,y);
 
-                    owner.AddChild(grassObj);
+                    Tiles.Add(grassObj);
                 }
-
 
             }
         }

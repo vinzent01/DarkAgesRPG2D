@@ -106,6 +106,8 @@ public class Object : IDrawable, ILoadable, IUpdatable{
     public List<Object> Children;
     public List<Component> Components;
 
+
+
     public Object(){
         Name = "none";
         id = "none";
@@ -266,7 +268,7 @@ public class Object : IDrawable, ILoadable, IUpdatable{
                 );  
             }
         }
-        
+
         foreach (var c in World.SortObjectsByPosition(Children)){
             c.Draw();
         }
@@ -296,7 +298,6 @@ public class Object : IDrawable, ILoadable, IUpdatable{
 
     }
 
-
     protected virtual void OnDraw(){
 
     }
@@ -308,7 +309,6 @@ public class Object : IDrawable, ILoadable, IUpdatable{
     protected virtual void OnUnload(){
         
     }
-
 
     public void Flip(bool direction)
     {

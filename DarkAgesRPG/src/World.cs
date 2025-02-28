@@ -82,7 +82,7 @@ public class World : Object {
                 if (sprite != null)
                 {
                     yPosition += obj.Offset.Y + sprite.Height;
-                    yPosition += sprite.YsortOffset;
+                    yPosition -= State.Config.TileSize; // May break in the future
                 }
 
                 return yPosition + zOrder;

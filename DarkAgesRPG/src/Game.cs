@@ -66,14 +66,6 @@ public class Game : IUpdatable, ILoadable, IDrawable
 
         State.Config.isTurnEnabled = false;
 
-        var terrain = new Object(
-            "terrain",
-            "terrain",
-            new TerrainGenerator(100,100)
-        );
-
-        State.world.AddChild(terrain);
-
         // test horse
         var horse = new Actor(
             "Horse",
@@ -88,7 +80,9 @@ public class Game : IUpdatable, ILoadable, IDrawable
 
         State.world.AddChild(horse);
 
-
+        State.world.AddComponent(
+            new TerrainGenerator(100,100)
+        );
 
         State.world.Load();
     }
