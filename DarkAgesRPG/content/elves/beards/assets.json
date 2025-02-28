@@ -8,7 +8,7 @@
             {
                 "className" : "Beard",
                 "parameters" : {
-                    "spritePath" : "./beard1.png",
+                    "spritePath" : "res://elves/beard1.png",
                     "racesOffsets" : {
                         "human" : {
                             "X" : 10,
@@ -33,7 +33,7 @@
             {
                 "className" : "Beard",
                 "parameters" : {
-                    "spritePath" : "./beard2.png",
+                    "spritePath" : "res://elves/beard2.png",
                     "racesOffsets" : {
                         "human" : {
                             "X" : 10,
@@ -59,7 +59,7 @@
             {
                 "className" : "Beard",
                 "parameters" : {
-                    "spritePath" : "./beard3.png",
+                    "spritePath" : "res://elves/beard3.png",
                     "racesOffsets" : {
                         "human" : {
                             "X" : 9,

@@ -9,7 +9,7 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "./bow.png"
+                    "path" : "res://melee-weapons/bow.png"
                 }
             },
             {

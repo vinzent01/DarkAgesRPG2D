@@ -1,22 +1,21 @@
 [
     {
-        "Name" : "Dwarf Beard 1",
-        "id" : "dwarf-beard1",
+        "Name" : "human beard",
+        "id" : "human-beard1",
         "tags" : ["beard"],
-
 
         "components" : [
             {
                 "className" : "Beard",
                 "parameters" : {
-                    "spritePath" : "./beard1.png",
+                    "spritePath" : "res://humans/beard1.png",
                     "racesOffsets" : {
                         "human" : {
-                            "X" : 10,
+                            "X" : 9,
                             "Y" : 1
                         },
                         "dwarf" : {
-                            "X" : 11,
+                            "X" : 10,
                             "Y" : 0
                         }
                     },
@@ -26,23 +25,22 @@
         ]
     },
     {
-        "Name" : "Dwarf Beard 2",
-        "id" : "dwarf-beard2",
+        "Name" : "human beard 2",
+        "id" : "human-beard2",
         "tags" : ["beard"],
-
 
         "components" : [
             {
                 "className" : "Beard",
                 "parameters" : {
-                    "spritePath" : "./beard2.png",
+                    "spritePath" : "res://humans/beard2.png",
                     "racesOffsets" : {
                         "human" : {
-                            "X" : 10,
+                            "X" : 9,
                             "Y" : 1
                         },
                         "dwarf" : {
-                            "X" : 11,
+                            "X" : 10,
                             "Y" : 0
                         }
                     },
@@ -52,23 +50,22 @@
         ]
     },
     {
-        "Name" : "Dwarf Beard 3",
-        "id" : "dwarf-beard3",
+        "Name" : "human beard 3",
+        "id" : "human-beard3",
         "tags" : ["beard"],
-
 
         "components" : [
             {
                 "className" : "Beard",
                 "parameters" : {
-                    "spritePath" : "./beard3.png",
+                    "spritePath" : "res://humans/beard3.png",
                     "racesOffsets" : {
                         "human" : {
-                            "X" : 10,
+                            "X" : 9,
                             "Y" : 1
                         },
                         "dwarf" : {
-                            "X" : 11,
+                            "X" : 10,
                             "Y" : 0
                         }
                     },
@@ -78,50 +75,22 @@
         ]
     },
     {
-        "Name" : "Dwarf Beard 4",
-        "id" : "dwarf-beard4",
+        "Name" : "human beard 4",
+        "id" : "human-beard4",
         "tags" : ["beard"],
-
 
         "components" : [
             {
                 "className" : "Beard",
                 "parameters" : {
-                    "spritePath" : "./beard4.png",
+                    "spritePath" : "res://humans/beard4.png",
                     "racesOffsets" : {
                         "human" : {
-                            "X" : 10,
+                            "X" : 9,
                             "Y" : 1
                         },
                         "dwarf" : {
-                            "X" : 11,
-                            "Y" : 0
-                        }
-                    },
-                    "racesId" : ["dwarf", "human", "orc", "elf"]
-                }
-
-            }
-        ]
-    },
-    {
-        "Name" : "Dwarf Beard 5",
-        "id" : "dwarf-beard5",
-        "tags" : ["beard"],
-
-
-        "components" : [
-            {
-                "className" : "Beard",
-                "parameters" : {
-                    "spritePath" : "./beard5.png",
-                    "racesOffsets" : {
-                        "human" : {
                             "X" : 10,
-                            "Y" : 1
-                        },
-                        "dwarf" : {
-                            "X" : 11,
                             "Y" : 0
                         }
                     },
@@ -131,23 +100,22 @@
         ]
     },
     {
-        "Name" : "Dwarf Beard 6",
-        "id" : "dwarf-beard6",
+        "Name" : "human beard 5",
+        "id" : "human-beard5",
         "tags" : ["beard"],
-
 
         "components" : [
             {
                 "className" : "Beard",
                 "parameters" : {
-                    "spritePath" : "./beard5.png",
+                    "spritePath" : "res://humans/beard5.png",
                     "racesOffsets" : {
                         "human" : {
-                            "X" : 10,
+                            "X" : 9,
                             "Y" : 1
                         },
                         "dwarf" : {
-                            "X" : 11,
+                            "X" : 10,
                             "Y" : 0
                         }
                     },

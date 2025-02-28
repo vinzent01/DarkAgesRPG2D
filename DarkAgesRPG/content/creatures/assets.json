@@ -10,7 +10,7 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "./wolf.png"
+                    "path" : "res://creatures/wolf.png"
                 }
             }
         ]
@@ -27,7 +27,7 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "./deer.png"
+                    "path" : "res://creatures/deer.png"
                 }
             }
         ]
@@ -44,7 +44,7 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "./bear.png"
+                    "path" : "res://creatures/bear.png"
                 }
             }
         ]
@@ -61,7 +61,7 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "./horse.png"
+                    "path" : "res://creatures/horse.png"
                 }
             }
         ]
@@ -78,7 +78,7 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "./white-horse.png"
+                    "path" : "res://creatures/white-horse.png"
                 }
             }
         ]
@@ -95,7 +95,7 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "./griffon.png"
+                    "path" : "res://creatures/griffon.png"
                 }
             }
         ]
@@ -111,7 +111,7 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "./rabbit.png"
+                    "path" : "res://creatures/rabbit.png"
                 }
             }
         ]

@@ -9,7 +9,7 @@ namespace DarkAgesRPG;
 
 public class Sprite : Component {
     public Texture2D Texture;
-    public string TexturePath;
+    public string ResourcePath;
     public Color Color;
     public Vector2 offset;
     public Vector2 Origin;
@@ -30,30 +30,36 @@ public class Sprite : Component {
 
     public Sprite(string texturePath){
         Color = new Color(255,255,255,255);
-        TexturePath = texturePath;
+        ResourcePath = texturePath;
     }
     public Sprite(string texturePath, Vector2 Scale){
         Color = new Color(255,255,255,255);
-        TexturePath = texturePath;
+        ResourcePath = texturePath;
     }
 
     public Sprite(string texturePath, Vector2 Scale, Vector2 Offset){
         Color = new Color(255,255,255,255);
-        TexturePath = texturePath;
+        ResourcePath = texturePath;
         this.offset = Offset;
     }
 
     public Sprite(string texturePath, Vector2 Scale, Vector2 Offset, float YsortOffset){
         Color = new Color(255,255,255,255);
-        TexturePath = texturePath;
+        ResourcePath = texturePath;
         this.offset = Offset;
         this.YsortOffset = YsortOffset;
     }
 
 
     public override void Load(){
-        Debug.Assert(File.Exists(TexturePath));
-        Texture = LoadTexture(TexturePath);
+        var resource = State.packageManager.GetResource<TextureResource>(ResourcePath);
+        Debug.Assert(resource != null);
+        
+        if (resource != null){
+
+            Texture = resource.Get();
+        }
+
         SetTextureFilter(Texture, TextureFilter.Point);
     }
 

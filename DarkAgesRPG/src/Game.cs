@@ -74,50 +74,11 @@ public class Game : IUpdatable, ILoadable, IDrawable
 
         State.world.AddChild(terrain);
 
-        // chest
-        var chest = new Object(
-            "chest", 
-            "chest",
-            new MultiSprite(
-                new Dictionary<string, Sprite>{
-                    {"closed", new Sprite("./content/chest/chest-closed.png")},
-                    {"open", new Sprite("./content/chest/chest-open.png")}
-                }
-            ),
-            new Inventory(),
-            new ActionsToPerform( new List<Action>() {
-                new OpenInventoryAction()
-            }),
-            new InteractComponent(),
-            new ContainerComponent()
-        );
-
-        var chestInventory = chest.GetComponent<Inventory>();
-
-        if (chestInventory != null){
-            var items = State.packageManager.GetAssetByTags("item");
-            foreach (var item in items){
-                var itemObj = item.Instanciate();
-                itemObj.Load();
-
-                itemObj.AddComponent(new ActionsToPerform(
-                    new List<Action>(){
-                        new EquipAction()
-                    }
-                ));
-                
-                chestInventory.AddItem(itemObj);
-            }
-        }
-
-        chest.CellPosition = new Vector2i(3,3);
-        State.world.AddChild(chest);
-
         // test horse
         var horse = new Actor(
             "Horse",
             "horse",
-            new Sprite("./content/creatures/horse.png"),
+            new Sprite("res://creatures/horse.png"),
             new FootPosition(),
             new RandomStep()
         );
@@ -130,10 +91,6 @@ public class Game : IUpdatable, ILoadable, IDrawable
 
 
         State.world.Load();
-
-        var chestMultiSprite = chest.GetComponent<MultiSprite>();
-        if (chestMultiSprite != null && chestMultiSprite.CurrentSprite != null)
-            chestMultiSprite.Offset = new Vector2(0, -chestMultiSprite.CurrentSprite.Texture.Height / 2);
     }
 
 

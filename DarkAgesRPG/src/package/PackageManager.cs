@@ -1,5 +1,3 @@
-using System.Diagnostics;
-using CSScripting;
 
 namespace DarkAgesRPG;
 
@@ -10,7 +8,7 @@ public class PackageManager {
         Package package = new(directory);
 
         package.LoadMeta();
-        package.LoadAssets();
+        package.LoadPackage();
 
         return package;
     }
@@ -31,6 +29,38 @@ public class PackageManager {
                     Console.WriteLine(e + " Could Not load package " + folder);
                 }
             }
+        }
+    }
+
+    public T? GetResource<T>(string path) where T : Resource{
+
+        var totalPath = path.Replace("res://", "");
+
+        var paths = totalPath.Split("/", 2);
+
+        if (paths.Length > 1){
+            var packagePath = paths[0];
+            var resourcePath = paths[1];
+
+            var package = GetPackage(packagePath);
+
+            if (package != null){
+                var result = package.GetResource(resourcePath);
+
+                if (result == null){
+                    Console.WriteLine($"Resource {resourcePath} in {packagePath} not found.");
+                }
+
+                return result as T;
+            }
+            else {
+                Console.WriteLine($"Package {packagePath } not found in {totalPath}.");
+                return null;
+            }
+        }
+        else {
+            Console.WriteLine($"Could Not load Resource {path}");
+            return null;
         }
     }
 
@@ -73,6 +103,14 @@ public class PackageManager {
         }
 
         return assets;
+    }
+
+    public Package? GetPackage(string name){
+        foreach (var package in Packages){
+            if (package.Meta.Name == name)
+                return package;
+        }
+        return null;
     }
 
     public List<Asset> GetAssetByTags(string tag){

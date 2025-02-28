@@ -18,7 +18,7 @@
                             "Y" : -1
                         }
                     },
-                    "spritePath" : "./short-hair2.png",
+                    "spritePath" : "res://humans/short-hair2.png",
                     "racesId" : ["dwarf", "human", "orc", "dwarf"]
                 }
             }
@@ -43,7 +43,7 @@
                             "Y" : -1
                         }
                     },
-                    "spritePath" : "./medium-hair.png",
+                    "spritePath" : "res://humans/medium-hair.png",
                     "racesId" : ["dwarf", "human", "orc", "dwarf"]
                 }
             }
@@ -68,7 +68,7 @@
                             "Y" : -2
                         }
                     },
-                    "spritePath" : "./medium-hair2.png",
+                    "spritePath" : "res://humans/medium-hair2.png",
                     "racesId" : ["dwarf", "human", "orc", "dwarf"]
                 }
             }
@@ -93,7 +93,7 @@
                             "Y" : -3
                         }
                     },
-                    "spritePath" : "./samurai-hair.png",
+                    "spritePath" : "res://humans/samurai-hair.png",
                     "racesId" : ["dwarf", "human", "orc", "dwarf"]
                 }
             }
@@ -118,7 +118,7 @@
                             "Y" : -3
                         }
                     },
-                    "spritePath" : "./samurai-hair2.png",
+                    "spritePath" : "res://humans/samurai-hair2.png",
                     "racesId" : ["dwarf", "human", "orc", "dwarf"]
                 }
             }
@@ -143,7 +143,7 @@
                             "Y" : -3
                         }
                     },
-                    "spritePath" : "./samurai-hair3.png",
+                    "spritePath" : "res://humans/samurai-hair3.png",
                     "racesId" : ["dwarf", "human", "orc", "dwarf"]
                 }
             }

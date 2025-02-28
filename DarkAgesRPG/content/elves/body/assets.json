@@ -1,16 +1,16 @@
 [
     {
-        "Name" : "Dwarf Race",
-        "id" : "dwarf",
+        "Name" : "Elf Race",
+        "id" : "elf",
         "tags" : [ "race"],
 
         "components" : [
             {
                 "className" : "RaceComponent",
                 "parameters" : {
-                    "spriteMasculine" : "./dwarf-male.png",
-                    "spriteFeminine" : "./dwarf-female.png",
-                    "raceId" : "dwarf",
+                    "spriteMasculine" : "res://elves/male-body.png",
+                    "spriteFeminine" : "res://elves/female-body.png",
+                    "raceId" : "elf",
                     "hairColors" : [
                         "#4f392a",
                         "#de4a2c",
@@ -18,9 +18,9 @@
                         "#ebe4df"
                     ],
                     "skinColors" : [
-                        "#eec39a",
-                        "#b6825d",
-                        "#b6804d"
+                        "#efcdac",
+                        "#9c6842",
+                        "#db9951"
                     ]
                 }
             }

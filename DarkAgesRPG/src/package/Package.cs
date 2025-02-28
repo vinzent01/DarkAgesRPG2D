@@ -1,167 +1,20 @@
 
 using System.Diagnostics;
-using System.Numerics;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Raylib_cs;
 
 namespace DarkAgesRPG;
-
-public class AssetComponent {
-    public string className;
-    public Dictionary<string, object> parameters;
-}
-
-public class Asset {
-
-    public string Name;
-    public string id;
-    public string assetDirectory;
-    public string[]? tags;
-
-    public AssetComponent[] components;
-    public string type;
-
-    public AssetComponent? GetComponent(string className){
-        foreach (var component in components){
-            if (component.className == className){
-                return component;
-            }
-        }
-
-        return null;
-    }
-
-    public Object Instanciate(){
-
-        var Object = new Object();
-
-        if (this.type == "Actor"){
-            Object = new Actor();
-        }
-
-        Object.id = this.id;
-        Object.Name = this.Name;
-
-        foreach (var component in components){
-            var parameters = component.parameters;
-
-
-            switch (component.className){
-
-                case  "Hair":
-                    Object.AddComponent(
-                        new Hair(
-                            (parameters["racesId"] as JArray).ToObject<string[]>(),
-                            (parameters["racesOffsets"] as JObject).ToObject<Dictionary<string, Vector2>>(),
-                            new Sprite(Path.Join(assetDirectory, (string)parameters["spritePath"]))
-                        )
-                    );
-                break;
-
-                case "Beard":
-                    Object.AddComponent(
-                        new Beard(
-                            (parameters["racesId"] as JArray).ToObject<string[]>(),
-                            (parameters["racesOffsets"] as JObject).ToObject<Dictionary<string, Vector2>>(),
-                            new Sprite(Path.Join(assetDirectory, (string)parameters["spritePath"]))
-                        )
-                    );
-                break;
-
-                case "RaceComponent" :
-
-                    var hairColorsHex = (parameters["hairColors"] as JArray).ToObject<string[]>();
-                    var hairColorsColor = new Color[hairColorsHex.Length];
-
-                    for (var i = 0; i < hairColorsHex.Length; i++){
-                        hairColorsColor[i] = Utils.HexToColor((string)hairColorsHex[i]);
-                    }
-
-                    var SkinColorsHex = (parameters["skinColors"] as JArray).ToObject<string[]>();
-                    var skinColorsColor = new Color[SkinColorsHex.Length];
-
-                    for (var i = 0; i < SkinColorsHex.Length; i++){
-                        skinColorsColor[i] = Utils.HexToColor((string)SkinColorsHex[i]);
-                    }
-                    
-
-                    Object.AddComponent(
-                        new RaceComponent(
-                            (string)parameters["raceId"],
-                            new Sprite(Path.Join(assetDirectory, (string)parameters["spriteMasculine"])),
-                            new Sprite(Path.Join(assetDirectory, (string)parameters["spriteFeminine"])),
-                            hairColorsColor,
-                            skinColorsColor
-                        )
-                    );
-
-                break;
-
-                case "Sprite":
-
-                    parameters.TryGetValue("Offset", out var offsetparameter );
-                    parameters.TryGetValue("ysortOffset", out var ysortparameter);
-
-                    
-
-                    Vector2 offset;
-                    float ysort;
-
-                    if (offsetparameter == null){
-                        offset = new Vector2(0,0);
-                    }
-                    else {
-                        offset = (offsetparameter as JObject).ToObject<Vector2>();
-                    }
-
-                    if (ysortparameter == null){
-                        ysort = 0.0f;
-                    }
-                    else {
-                        ysort = (float)(double)ysortparameter;
-                    }
-
-                    Object.AddComponent(
-                        new Sprite(
-                            Path.Join(assetDirectory, (string)parameters["path"]), 
-                            new Vector2(1,1),
-                            offset,
-                            ysort
-                        )
-                    );
-
-                break;
-
-                case "Equipment":
-                    Object.AddComponent(
-                        new EquipmentComponent(
-                            (parameters["racesOffsets"] as JObject).ToObject<Dictionary<string, Vector2>>(), 
-                            (parameters["flippedOffset"] as JObject).ToObject<Vector2>()
-                        )
-                    );
-                break;
-
-                case "ItemComponent":
-                    Object.AddComponent(
-                        new Item()
-                    );
-                break;
-            }
-        }
-        return Object;
-    }
-}
 
 
 public class Package {
     public PackageMeta Meta;
     public Dictionary<string, List<Asset>> Assets;
+    public Dictionary<string, Resource> Resources;
     public string DirectoryPath;
 
     public Package(string path){
         DirectoryPath = path;
         Assets = new();
+        Resources = new();
     }
 
     public void LoadMeta(){
@@ -173,6 +26,7 @@ public class Package {
         var json = File.ReadAllText(assetPath);
         Asset? asset = JsonConvert.DeserializeObject<Asset>(json);
         asset.assetDirectory = assetDirectory;
+        asset.contentDirectory = Path.Join(assetDirectory, "../");
         Debug.Assert(asset != null);
 
         return asset;
@@ -194,8 +48,39 @@ public class Package {
         return assets;
     }
 
+    public Resource? LoadResource(string file){
+        var filename = Path.GetFileName(file);
 
-    public void LoadAssets(string directoryPath = null)
+        if (file.EndsWith(".png")){
+
+            filename = filename.Replace(".png", "");
+
+            return new TextureResource(filename, file, ResourceType.Texture);
+        }
+
+        Console.WriteLine($"Could Not load Resource {file}");
+
+        return null;
+    }
+
+    public List<Resource> LoadResources(string path){
+        List<Resource> Resources = new();
+        var files = Directory.GetFiles(path);
+
+        foreach (var file in files){
+            Resource? resource = LoadResource(file);
+
+            if (resource != null){
+                resource.Load();
+                Resources.Add(resource);
+            }
+        }
+
+        return Resources;
+    }
+
+
+    public void LoadPackage(string directoryPath = null, int recursivity =0)
     {
         if (directoryPath == null)
             directoryPath = DirectoryPath;
@@ -203,6 +88,20 @@ public class Package {
         // load assets outside folders
         var singleAsset = Path.Join(directoryPath, "asset.json");
         var assetList = Path.Join(directoryPath, "assets.json");
+
+        if (recursivity == 0){
+            var resourcesPath = Path.Join(directoryPath, "resources");
+
+            // carregar recursos
+            if (Directory.Exists(resourcesPath)){
+                var resourcesList = LoadResources(resourcesPath);
+
+                foreach (var resource in resourcesList){
+                    AddResource(resource);
+                }
+            }
+        }
+
 
         // Verifica se o arquivo asset.json existe no diretório
         if (File.Exists(singleAsset))
@@ -246,7 +145,7 @@ public class Package {
             }
 
             // Chamada recursiva para processar subdiretórios
-            LoadAssets(assetDirectory);
+            LoadPackage(assetDirectory, recursivity + 1);
         }
     }
 
@@ -260,6 +159,11 @@ public class Package {
                 Assets[tag] = new(){asset};
             }
         }
+    }
+
+    public void AddResource(Resource resource){
+        var localResourcePath = resource.Path.Replace($"{DirectoryPath}/resources/", "");
+        Resources.TryAdd(localResourcePath, resource);
     }
 
 
@@ -293,5 +197,11 @@ public class Package {
         }
 
         return allAssets;
+    }
+
+    public Resource? GetResource(string path){
+        Resources.TryGetValue(path, out var res);
+
+        return res;
     }
 }

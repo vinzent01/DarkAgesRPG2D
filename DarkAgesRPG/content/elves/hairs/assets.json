@@ -8,7 +8,7 @@
             {
                 "className" : "Hair",
                 "parameters" : {
-                    "spritePath" : "./short-hair.png",
+                    "spritePath" : "res://elves/short-hair.png",
                     "racesOffsets" : {
                         "elf" : {
                             "X" : 10,
@@ -29,7 +29,7 @@
             {
                 "className" : "Hair",
                 "parameters" : {
-                    "spritePath" : "./short-hair2.png",
+                    "spritePath" : "res://elves/short-hair2.png",
                     "racesOffsets" : {
                         "human" : {
                             "X" : 9,
@@ -56,7 +56,7 @@
                             "Y" : 1
                         }
                     },
-                    "spritePath" : "./medium-hair.png",
+                    "spritePath" : "res://elves/medium-hair.png",
                     "racesId" : [ "elf"]
                 }
             }
@@ -72,7 +72,7 @@
             {
                 "className" : "Hair",
                 "parameters" : {
-                    "spritePath" : "./medium-hair2.png",
+                    "spritePath" : "res://elves/medium-hair2.png",
                     "racesOffsets" : {
                         "human" : {
                             "X" : 10,

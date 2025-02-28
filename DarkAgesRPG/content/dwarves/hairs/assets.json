@@ -18,7 +18,7 @@
                             "Y" : 0
                         }
                     },
-                    "spritePath" : "long-hair1.png",
+                    "spritePath" : "res://dwarves/long-hair1.png",
                     "racesId" : ["dwarf", "human", "orc"]
 
                 }
@@ -44,7 +44,7 @@
                             "Y" : 0
                         }
                     },
-                    "spritePath" : "long-hair2.png",
+                    "spritePath" : "res://dwarves/long-hair2.png",
                     "racesId" : ["dwarf", "human", "orc"]
                 }
             }
@@ -69,7 +69,7 @@
                             "Y" : 1
                         }
                     },
-                    "spritePath" : "short-hair1.png",
+                    "spritePath" : "res://dwarves/short-hair1.png",
                     "racesId" : ["dwarf", "human", "orc"]
                 }
             }
@@ -94,7 +94,7 @@
                             "Y" : 0
                         }
                     },
-                    "spritePath" : "short-hair2.png",
+                    "spritePath" : "res://dwarves/short-hair2.png",
                     "racesId" : ["dwarf", "human", "orc"]
                 }
             }
@@ -119,7 +119,7 @@
                             "Y" : -1
                         }
                     },
-                    "spritePath" : "short-hair3.png",
+                    "spritePath" : "res://dwarves/short-hair3.png",
                     "racesId" : ["dwarf", "human", "orc"]
                 }
             }

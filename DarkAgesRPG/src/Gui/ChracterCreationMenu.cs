@@ -38,12 +38,12 @@ public class SelectorWidget<T> : Widget {
         textWidget = new TextWidget(items.Keys.ToList()[0], 20);
 
         var arrowLeft = new ButtonSprite(
-            new SpriteRenderer(new Sprite("./content/hud/arrow-left-button.png")),
+            new SpriteRenderer(new Sprite("res://hud/arrow-left-button.png")),
             () => { Previous();}
         );
 
         var arrowRight = new ButtonSprite(
-            new SpriteRenderer(new Sprite("./content/hud/arrow-right-button.png")),
+            new SpriteRenderer(new Sprite("res://hud/arrow-right-button.png")),
             () => { Next();}
         );
 

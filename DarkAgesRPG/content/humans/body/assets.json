@@ -8,8 +8,8 @@
             {
                 "className" : "RaceComponent",
                 "parameters" : {
-                    "spriteMasculine" : "./male-body.png",
-                    "spriteFeminine" : "./female-body.png",
+                    "spriteMasculine" : "res://humans/male-body.png",
+                    "spriteFeminine" : "res://humans/female-body.png",
                     "raceId" : "human",
                     "hairColors" : [
                         "#4f392a",

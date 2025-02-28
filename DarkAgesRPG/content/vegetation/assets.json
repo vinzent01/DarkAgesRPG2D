@@ -9,7 +9,7 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "./Grass.png"
+                    "path" : "res://vegetation/Grass.png"
                 }
             }
         ]
@@ -24,7 +24,7 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "./grass-object.png"
+                    "path" : "res://vegetation/grass-object.png"
                 }
             }
         ]
@@ -39,7 +39,7 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "./dirt.png"
+                    "path" : "res://vegetation/dirt.png"
                 }
             }
         ]
@@ -54,7 +54,7 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "./sand.png"
+                    "path" : "res://vegetation/sand.png"
                 }
             }
         ]
@@ -69,7 +69,7 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "./cyan-bush-flower.png"
+                    "path" : "res://vegetation/cyan-bush-flower.png"
                 }
             }
         ]
@@ -84,7 +84,7 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "./purple-bush-flower.png"
+                    "path" : "res://vegetation/purple-bush-flower.png"
                 }
             }
         ]
@@ -99,7 +99,7 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "./pine-tree.png"
+                    "path" : "res://vegetation/pine-tree.png"
                 }
             }
         ]
@@ -114,7 +114,7 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "./purple-flower.png"
+                    "path" : "res://vegetation/purple-flower.png"
                 }
             }
         ]
@@ -129,7 +129,7 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "./white-flower.png"
+                    "path" : "res://vegetation/white-flower.png"
                 }
             }
         ]
