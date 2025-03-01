@@ -99,7 +99,8 @@
             {
                 "className" : "Sprite",
                 "parameters" : {
-                    "path" : "res://vegetation/pine-tree.png"
+                    "path" : "res://vegetation/pine-tree.png",
+                    "origin" : "BottomCenter"
                 }
             }
         ]

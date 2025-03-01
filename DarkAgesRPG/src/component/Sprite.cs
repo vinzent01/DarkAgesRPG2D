@@ -1,18 +1,28 @@
 using System.Diagnostics;
 using System.Numerics;
-using System.Xml.Schema;
-using DarkAgesRPG.Gui;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json.Converters;
 using Raylib_cs;
 using static Raylib_cs.Raylib;
 
 namespace DarkAgesRPG;
+
+[JsonConverter(typeof(StringEnumConverter))]
+public enum SpriteOrigin {
+    TopLeft,
+    Center,
+    BottomCenter,
+    Custom
+}
 
 public class Sprite : Component {
     public Texture2D Texture;
     public string ResourcePath;
     public Color Color;
     public Vector2 offset;
-    public Vector2 Origin;
+    public SpriteOrigin Origin;
+    public Vector2 OriginOffset;
+    public Vector2 Scale;
     public float YsortOffset;
 
 
@@ -31,16 +41,23 @@ public class Sprite : Component {
     public Sprite(string texturePath){
         Color = new Color(255,255,255,255);
         ResourcePath = texturePath;
+        this.Origin = SpriteOrigin.TopLeft;
     }
+
     public Sprite(string texturePath, Vector2 Scale){
         Color = new Color(255,255,255,255);
         ResourcePath = texturePath;
+        this.Scale = Scale;
+        this.Origin = SpriteOrigin.TopLeft;
+
     }
 
     public Sprite(string texturePath, Vector2 Scale, Vector2 Offset){
         Color = new Color(255,255,255,255);
         ResourcePath = texturePath;
         this.offset = Offset;
+        this.Scale = Scale;
+        this.Origin = SpriteOrigin.TopLeft;
     }
 
     public Sprite(string texturePath, Vector2 Scale, Vector2 Offset, float YsortOffset){
@@ -48,8 +65,25 @@ public class Sprite : Component {
         ResourcePath = texturePath;
         this.offset = Offset;
         this.YsortOffset = YsortOffset;
+        this.Scale = Scale;
+        this.Origin = SpriteOrigin.TopLeft;
     }
 
+    public Sprite(
+        string texturePath, 
+        Vector2 Scale, 
+        Vector2 Offset, 
+        float YsortOffset,
+        SpriteOrigin Origin)
+    {
+        Color = new Color(255,255,255,255);
+        ResourcePath = texturePath;
+
+        this.offset = Offset;
+        this.YsortOffset = YsortOffset;
+        this.Origin = Origin;
+        this.Scale = Scale;
+    }
 
     public override void Load(){
         var resource = State.packageManager.GetResource<TextureResource>(ResourcePath);
@@ -67,6 +101,21 @@ public class Sprite : Component {
         UnloadTexture(Texture);
     }
 
+    public Vector2 GetOrigin(){
+        switch (Origin){
+            case SpriteOrigin.Center:
+                return new Vector2(Width /2, Height / 2);
+
+            case SpriteOrigin.TopLeft:
+                return new Vector2(0,0);
+            
+            case SpriteOrigin.BottomCenter:
+                return new Vector2(Width / 2, Height);
+        }
+
+        return OriginOffset;
+    }
+
     public override void Draw(){
         int width = owner != null ? owner.IsFlipped? -Texture.Width : Texture.Width : Texture.Width;
         int height = Texture.Height;
@@ -80,6 +129,7 @@ public class Sprite : Component {
             totalOffset = offset;
         }
 
+
         Rectangle rect = new(0,0, width, height);
 
         if (owner != null){
@@ -88,10 +138,10 @@ public class Sprite : Component {
                 Texture, 
                 rect, 
                 new Rectangle(
-                    owner.TotalPosition + totalOffset * owner.Scale, 
+                    (owner.TotalPosition + totalOffset) * owner.Scale, 
                     new Vector2(owner.Scale.X * ( Texture.Width), owner.Scale.Y * ( Texture.Height))
                 ),
-                new Vector2(0,0),
+                GetOrigin(),
                 0, 
                 Color
             );
@@ -113,7 +163,7 @@ public class Sprite : Component {
                     totalOffset,
                     new Vector2(Texture.Width, Texture.Height)
                 ), 
-                new Vector2(0,0),
+                GetOrigin(),
                 0, 
                 Color
             );
@@ -137,7 +187,7 @@ public class Sprite : Component {
                 position, 
                 new Vector2(Texture.Width, Texture.Height)
             ), 
-            Origin, 
+            GetOrigin(), 
             0, 
             Color
         );
@@ -157,5 +207,4 @@ public class Sprite : Component {
         return false;
 
     }
-
 }

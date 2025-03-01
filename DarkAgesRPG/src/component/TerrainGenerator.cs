@@ -78,6 +78,7 @@ public class TerrainGenerator : Component{
                             treeObj.Load();
                             treeObj.IsVisible = true;
                             treeObj.CellPosition = new Vector2i(x,y);
+                            treeObj.Offset = new Vector2(State.Config.TileSize / 2, State.Config.TileSize);
 
                             owner.AddChild(treeObj);
                             TreePositions.Add(treeObj.CellPosition);

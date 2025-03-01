@@ -128,6 +128,7 @@ public class Object : IDrawable, ILoadable, IUpdatable{
         IsVisible = true;
         Scale = new Vector2(1,1);
         CellPositions = new();
+        DoDrawDebug = true;
 
         foreach (var component in components){
             AddComponent(component);

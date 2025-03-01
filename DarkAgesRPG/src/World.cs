@@ -81,8 +81,17 @@ public class World : Object {
                 // Se o objeto tiver um sprite, considere a altura para calcular a ordenação.
                 if (sprite != null)
                 {
-                    yPosition += obj.Offset.Y + sprite.Height;
-                    yPosition -= State.Config.TileSize; // May break in the future
+                    yPosition += obj.Offset.Y;
+
+                    if (sprite.Origin == SpriteOrigin.TopLeft){
+                        yPosition += sprite.Height;
+                    }
+
+                    if (sprite.Origin == SpriteOrigin.Center){
+                        yPosition += sprite.Height / 2;
+                    }
+
+                    yPosition -= State.Config.TileSize;
                 }
 
                 return yPosition + zOrder;

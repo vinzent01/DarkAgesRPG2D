@@ -70,7 +70,6 @@ public class Asset {
                 break;
 
                 case "RaceComponent" :
-
                     var hairColorsHex = (parameters["hairColors"] as JArray).ToObject<string[]>();
                     var hairColorsColor = new Color[hairColorsHex.Length];
 
@@ -102,17 +101,24 @@ public class Asset {
 
                     parameters.TryGetValue("Offset", out var offsetparameter );
                     parameters.TryGetValue("ysortOffset", out var ysortparameter);
-
-                    
+                    parameters.TryGetValue("origin", out var originparameter);
 
                     Vector2 offset;
                     float ysort;
+                    SpriteOrigin origin;
 
                     if (offsetparameter == null){
                         offset = new Vector2(0,0);
                     }
                     else {
                         offset = (offsetparameter as JObject).ToObject<Vector2>();
+                    }
+
+                    if (originparameter == null){
+                        origin = SpriteOrigin.TopLeft;
+                    }
+                    else {
+                        origin = new JValue(originparameter).ToObject<SpriteOrigin>();
                     }
 
                     if (ysortparameter == null){
@@ -127,7 +133,8 @@ public class Asset {
                             Path.Join(contentDirectory, (string)parameters["path"]), 
                             new Vector2(1,1),
                             offset,
-                            ysort
+                            ysort,
+                            origin
                         )
                     );
 
