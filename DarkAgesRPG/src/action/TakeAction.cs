@@ -12,12 +12,13 @@ public class TakeAction : Action {
         Inventory? inventory = obj.GetComponent<Inventory>();
 
         if (inventory != null){
-            inventory.AddItem(target);
+            bool succes = inventory.AddItem(target);
+
+            if (succes){
+                target.IsVisible = false;
+                State.world.ToRemove(target);
+            }
         }
-
-        target.IsVisible = false;
-        State.world.ToRemove(target);
-
 
         return true;
     }
@@ -27,10 +28,10 @@ public class TakeAction : Action {
         Inventory? inventory = obj.GetComponent<Inventory>();
         EquipmentList? Equipments = obj.GetComponent<EquipmentList>();
 
-        if (inventory != null && inventory.HasExactItem(obj))
+        if (inventory != null && inventory.HasExactItem(target))
             return false;
         
-        if (Equipments != null && Equipments.HasEquip(obj))
+        if (Equipments != null && Equipments.HasEquip(target))
             return false;
 
 

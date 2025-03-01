@@ -33,7 +33,11 @@ public class Inventory : Component {
         return false;
     }
 
-    public void AddItem(Object item) {
+    public bool AddItem(Object item) {
+
+        if (itemsOrStacks.Contains(item)){
+            return false;
+        }
 
         var itemComponent = item.GetComponent<Item>();
         var itemStackComponent = item.GetComponent<ItemStackComponent>();
@@ -58,7 +62,7 @@ public class Inventory : Component {
 
                 itemComponent.inventory = this;
                 OnChange?.Invoke();
-                return;
+                return true;
             }
         }
 
@@ -78,7 +82,7 @@ public class Inventory : Component {
                 
                 itemsOrStacks[i] = newItemStack; // Substitui o item pela nova pilha
                 OnChange?.Invoke();
-                return;
+                return false;
             }
         }
 
@@ -97,8 +101,9 @@ public class Inventory : Component {
 
         itemsOrStacks.Add(item);
         OnChange?.Invoke();
+        return true;
     }
-    public void RemoveItem(Object obj) {
+    public bool RemoveItem(Object obj) {
         // Tenta remover diretamente se o objeto está na lista principal
         if (itemsOrStacks.Remove(obj)) {
             obj.Parent = null;
@@ -107,7 +112,7 @@ public class Inventory : Component {
             if (itemsOrStacks.Count == 0){
                 OnEmpty?.Invoke();
             }
-            return;
+            return true;
         }
 
         // Procura dentro das pilhas
@@ -127,10 +132,12 @@ public class Inventory : Component {
                     }
 
                     OnChange?.Invoke();
-                    return;
+                    return true;
                 }
             }
         }
+
+        return false;
 
 
         // Caso o item não tenha sido encontrado, nada é feito
