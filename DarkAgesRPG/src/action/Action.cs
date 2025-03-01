@@ -226,9 +226,28 @@ public class StepAction : Action
 
     public Bezier StartMove(Vector2 direction, Vector2 RelativePosition, int CellSize)
     {
+        Debug.Assert(obj != null);
+
+        // check collision to the next cell
+        var nextCell = obj.CellPosition + new Vector2i(direction);
+        var ObjNextCell = State.world.Get(nextCell);
+
+        if (ObjNextCell.Count > 0){
+            direction = new Vector2(0,0);
+        }
+
+        // bezier curve
         Vector2 p1 = RelativePosition;
-        Vector2 p3 = new Vector2(p1.X + (direction.X * CellSize), p1.Y + (direction.Y * CellSize));
-        Vector2 p2 = new Vector2(p1.X + (direction.X * CellSize / 2), p1.Y + (direction.Y * CellSize / 2) - (CellSize * 1.5f));
+
+        Vector2 p2 = new Vector2(
+            p1.X + (direction.X * CellSize / 2),
+            p1.Y + (direction.Y * CellSize / 2) - (CellSize * 1.5f)
+        );
+
+        Vector2 p3 = new Vector2(
+            p1.X + (direction.X * CellSize), 
+            p1.Y + (direction.Y * CellSize)
+        );
 
         return new Bezier(p1, p2, p3);
     }

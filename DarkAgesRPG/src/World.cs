@@ -41,17 +41,25 @@ public class World : Object {
         }
     }
 
-    public List<Object> Get(Vector2i position){
-        List<Object> returnObjects = new ();
-
-        foreach (var obj in Children){
-            if (obj.CellPosition == position){
-                returnObjects.Add(obj);
-            }
-        }
-
+    public List<Object> Get(Vector2i position)
+    {
+        List<Object> returnObjects = new();
+        GetRecursive(this, position, returnObjects);
         return returnObjects;
     }
+
+    private void GetRecursive(Object current, Vector2i position, List<Object> result)
+    {
+        foreach (var obj in current.Children)
+        {
+            if (obj.CellPosition == position)
+            {
+                result.Add(obj);
+            }
+            GetRecursive(obj, position, result);
+        }
+    }
+
 
     public void ToRemove(Vector2i position){
         List<Object> objs = Get(position);

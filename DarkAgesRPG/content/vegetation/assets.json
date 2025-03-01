@@ -102,6 +102,15 @@
                     "path" : "res://vegetation/pine-tree.png",
                     "origin" : "BottomCenter"
                 }
+            },
+            {
+                "className" : "Collision",
+                "parameters" : {
+                    "cellPosition" : {
+                        "X" : 0,
+                        "Y" : 0
+                    }
+                }
             }
         ]
     },
