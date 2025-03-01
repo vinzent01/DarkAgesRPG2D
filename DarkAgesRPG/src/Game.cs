@@ -65,6 +65,7 @@ public class Game : IUpdatable, ILoadable, IDrawable
         State.packageManager.PrintAllAssets();
 
         State.Config.isTurnEnabled = false;
+        State.Camera.Position = new Vector2(50 * State.Config.TileSize,50 * State.Config.TileSize);
 
         // test horse
         var horse = new Actor(

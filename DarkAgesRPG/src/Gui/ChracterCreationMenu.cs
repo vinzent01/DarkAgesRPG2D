@@ -283,10 +283,10 @@ public class CharacterCreationMenu : Widget {
             Character.AddComponent(new EquipmentList());
 
             Character.Load();
-            Character.CellPosition = new Vector2i(0,0);
+            Character.CellPosition = new Vector2i(50,50);
 
             State.world.AddChild(Character);
-            State.Camera.target = Character;
+            State.Camera.Follow = Character;
             State.player = Character;
 
             State.RootWidget.RemoveById("Character-Creation-Menu");

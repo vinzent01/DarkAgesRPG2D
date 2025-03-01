@@ -6,7 +6,8 @@ namespace DarkAgesRPG;
 public class Camera : Object {
 
     private Camera2D camera;
-    public Object? target;
+    public Vector2 Position;
+    public Object? Follow;
 
     public Camera(){
         int screenWidth = Raylib.GetScreenWidth();
@@ -23,10 +24,12 @@ public class Camera : Object {
     
     protected override void OnUpdate(float delta)
     {
-        if (target != null){
-            camera.Target = target.TotalPosition;
+        if (Follow != null){
+            camera.Target = Follow.TotalPosition;
         }
-
+        else {
+            camera.Target = Position;
+        }
     }
 
     public bool IsInsideCameraView(Object obj)
