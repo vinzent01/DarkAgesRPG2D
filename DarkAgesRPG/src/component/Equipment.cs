@@ -14,8 +14,10 @@ public class EquipmentComponent : Component {
         if (equipmentFlippedOffset != null){
             EquipmentFlippedOffset = (Vector2)equipmentFlippedOffset;
         }
+        else {
+            this.EquipmentFlippedOffset = new Vector2(0,0);
+        }
 
-        this.EquipmentFlippedOffset = new Vector2(0,0);
         this.offsetByRace = offsetByRace;
 
     }

@@ -62,71 +62,8 @@ public class Action {
     }
 }
 
-public class TakeAction : Action {
-
-    public TakeAction() : base("Take") {
-
-    }
-
-    public override bool OnStart()
-    {
-        Inventory? inventory = target.GetComponent<Inventory>();
-
-        if (inventory != null){
-            inventory.AddItem(obj);
-        }
-
-        obj.IsVisible = false;
-        State.world.ToRemove(obj);
 
 
-        return true;
-    }
-
-    public override bool MeetsCondition(Object obj, Object target)
-    {
-        Inventory? inventory = target.GetComponent<Inventory>();
-        EquipmentList? Equipments = target.GetComponent<EquipmentList>();
-
-        if (inventory != null && inventory.HasExactItem(obj))
-            return false;
-        
-        if (Equipments != null && Equipments.HasEquip(obj))
-            return false;
-
-
-        return true;
-    }
-}
-
-public class EquipAction : Action {
-    public EquipAction() : base("Equip") {
-
-    }
-
-    public override bool OnStart()
-    {
-        EquipmentList? equips = target.GetComponent<EquipmentList>();
-        var itemComponent = obj.GetComponent<Item>();
-
-        if (itemComponent == null)
-            return false;
-
-        if (equips == null)
-            return false;
-
-        if (itemComponent.inventory != null){
-            itemComponent.inventory.RemoveItem(obj);
-        }
-
-        State.world.ToRemove(obj);
-        equips.AddEquip(obj);
-        obj.IsVisible = true;
-        
-        
-        return true;
-    }
-}
 
 public class OpenInventoryAction : Action {
     public OpenInventoryAction() : base("Open Inventory"){

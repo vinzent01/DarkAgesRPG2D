@@ -32,5 +32,39 @@
                 "parameters" : {}
             }
         ]
+    },
+    {
+        "name" : "Axe",
+        "id" : "axe",
+
+        "tags" : ["item", "equipment", "weapon"],
+
+        "components" : [
+            {
+                "className" : "Sprite",
+                "parameters" : {
+                    "path" : "res://melee-weapons/axe.png"
+                }
+            },
+            {
+                "className" : "Equipment",
+                "parameters" : {
+                    "racesOffsets" : {
+                        "human" : {
+                            "X" : 30,
+                            "Y" : 10
+                        }
+                    },
+                    "flippedOffset" : {
+                        "X" : 10,
+                        "Y" : 10
+                    }
+                }
+            },
+            {
+                "className" : "ItemComponent",
+                "parameters" : {}
+            }
+        ]
     }
 ]

@@ -42,7 +42,7 @@ public class ActionMenu : Widget{
         backgroundColor = new Color(25,25,25,100);
         CanDrag = true;
 
-        var ActionsToPerform = Actor.GetComponent<ActionsToPerform>();
+        var ActionsToPerform = target.GetComponent<ActionsToPerform>();
         var ActionsText = new TextWidget(obj.Name + " Actions", 22);
 
         ActionsText.DoMouseCollision =false;
@@ -59,7 +59,8 @@ public class ActionMenu : Widget{
             foreach (var action in ActionsToPerform.Actions){
                 if (action.MeetsCondition(Actor, Target)){
                     System.Action performAction =  () =>{
-                        action.StartAction(Actor, Target); this.Close();
+                        action.StartAction(Actor, Target); 
+                        this.Close();
                     };
 
                     AddChild(
