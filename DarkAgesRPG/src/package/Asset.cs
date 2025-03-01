@@ -88,8 +88,8 @@ public class Asset {
                     Object.AddComponent(
                         new RaceComponent(
                             (string)parameters["raceId"],
-                            new Sprite(Path.Join(contentDirectory, (string)parameters["spriteMasculine"])),
-                            new Sprite(Path.Join(contentDirectory, (string)parameters["spriteFeminine"])),
+                            new Sprite((string)parameters["spriteMasculine"]),
+                            new Sprite((string)parameters["spriteFeminine"]),
                             hairColorsColor,
                             skinColorsColor
                         )

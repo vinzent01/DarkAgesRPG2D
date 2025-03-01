@@ -22,7 +22,6 @@ public class Sprite : Component {
     public Vector2 offset;
     public SpriteOrigin Origin;
     public Vector2 OriginOffset;
-    public Vector2 Scale;
     public float YsortOffset;
 
 
@@ -44,28 +43,18 @@ public class Sprite : Component {
         this.Origin = SpriteOrigin.TopLeft;
     }
 
-    public Sprite(string texturePath, Vector2 Scale){
-        Color = new Color(255,255,255,255);
-        ResourcePath = texturePath;
-        this.Scale = Scale;
-        this.Origin = SpriteOrigin.TopLeft;
-
-    }
-
-    public Sprite(string texturePath, Vector2 Scale, Vector2 Offset){
+    public Sprite(string texturePath, Vector2 Offset){
         Color = new Color(255,255,255,255);
         ResourcePath = texturePath;
         this.offset = Offset;
-        this.Scale = Scale;
         this.Origin = SpriteOrigin.TopLeft;
     }
 
-    public Sprite(string texturePath, Vector2 Scale, Vector2 Offset, float YsortOffset){
+    public Sprite(string texturePath, Vector2 Offset, float YsortOffset){
         Color = new Color(255,255,255,255);
         ResourcePath = texturePath;
         this.offset = Offset;
         this.YsortOffset = YsortOffset;
-        this.Scale = Scale;
         this.Origin = SpriteOrigin.TopLeft;
     }
 
@@ -82,7 +71,6 @@ public class Sprite : Component {
         this.offset = Offset;
         this.YsortOffset = YsortOffset;
         this.Origin = Origin;
-        this.Scale = Scale;
     }
 
     public override void Load(){
@@ -138,7 +126,7 @@ public class Sprite : Component {
                 Texture, 
                 rect, 
                 new Rectangle(
-                    (owner.TotalPosition + totalOffset) * owner.Scale, 
+                    owner.TotalPosition + totalOffset * owner.Scale, 
                     new Vector2(owner.Scale.X * ( Texture.Width), owner.Scale.Y * ( Texture.Height))
                 ),
                 GetOrigin(),

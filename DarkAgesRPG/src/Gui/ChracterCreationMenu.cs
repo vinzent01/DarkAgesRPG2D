@@ -124,17 +124,12 @@ public class CharacterCreationMenu : Widget {
     ButtonList HairColorButtons;
     ButtonList SkinColorButtons;
 
-
-
-
     // data
     Dictionary<string, Asset> Races;
     Dictionary<string, Asset?> Hairs;
     Dictionary<string, Asset?> Beards;
 
-
     ObjectRendererWidget CharacterRenderer;
-
 
     public CharacterCreationMenu(){
         this.TotalSize = new Vector2i(300, 400);
@@ -171,14 +166,12 @@ public class CharacterCreationMenu : Widget {
         PrepareData();
         Debug.Assert(Races.Count > 0);
 
-        //p selectors
-
+        // selectors
         BeardSelector = new SelectorWidget<Asset?>(Beards, (widget) => {
             SetBeard(widget.GetValue());
         });
 
         BeardSelector.TotalSize = new Vector2i(this.TotalSize.X, BeardSelector.TotalSize.Y);
-
 
         GenreSelector = new SelectorWidget<int>(
             new Dictionary<string, int>(){
@@ -233,7 +226,8 @@ public class CharacterCreationMenu : Widget {
 
         SkinColorButtons = new();
         SkinColorButtons.flowDirection = FlowDirections.Horizontal;
-
+        
+        // Default values
         SetRace(Races.Values.ToList()[0]);
         SetGenre(0);
         PopulateHairColorButtons();
