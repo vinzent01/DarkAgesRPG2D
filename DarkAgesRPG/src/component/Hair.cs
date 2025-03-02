@@ -1,10 +1,11 @@
 using System.Numerics;
 using System.Runtime.InteropServices;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Newtonsoft.Json.Linq;
 
 namespace DarkAgesRPG;
 
-public class Hair : Component {
+public class Hair : Component{
 
     public string[ ] RacesId;
     public Dictionary<string, Vector2> racesOffsets;
@@ -40,6 +41,20 @@ public class Hair : Component {
     public override void Draw()
     {
         sprite.Draw();
+    }
+
+    public static void Serialize()
+    {
+
+    }
+
+    public static Hair Deserialize(Dictionary<string, object> parameters)
+    {
+        return new Hair(
+            (parameters["racesId"] as JArray).ToObject<string[]>(),
+            (parameters["racesOffsets"] as JObject).ToObject<Dictionary<string, Vector2>>(),
+            new Sprite((string)parameters["spritePath"])
+        );
     }
 
 }

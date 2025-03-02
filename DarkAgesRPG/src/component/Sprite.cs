@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Numerics;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using Raylib_cs;
 using static Raylib_cs.Raylib;
 
@@ -193,6 +194,44 @@ public class Sprite : Component {
         }
         
         return false;
+    }
 
+    public static Sprite Deserialize(Dictionary<string, object> parameters){
+        parameters.TryGetValue("Offset", out var offsetparameter );
+        parameters.TryGetValue("ysortOffset", out var ysortparameter);
+        parameters.TryGetValue("origin", out var originparameter);
+
+        Vector2 offset;
+        float ysort;
+        SpriteOrigin origin;
+
+        if (offsetparameter == null){
+            offset = new Vector2(0,0);
+        }
+        else {
+            offset = (offsetparameter as JObject).ToObject<Vector2>();
+        }
+
+        if (originparameter == null){
+            origin = SpriteOrigin.TopLeft;
+        }
+        else {
+            origin = new JValue(originparameter).ToObject<SpriteOrigin>();
+        }
+
+        if (ysortparameter == null){
+            ysort = 0.0f;
+        }
+        else {
+            ysort = (float)(double)ysortparameter;
+        }
+
+        return new Sprite(
+            Path.Join((string)parameters["path"]), 
+            new Vector2(1,1),
+            offset,
+            ysort,
+            origin
+        );
     }
 }

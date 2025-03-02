@@ -46,115 +46,12 @@ public class Asset {
         foreach (var component in components){
             var parameters = component.parameters;
 
+            var DeserializedComponent = ComponentDeserializer.Deserialize(component.className, parameters);
 
-            switch (component.className){
-
-                case  "Hair":
-                    Object.AddComponent(
-                        new Hair(
-                            (parameters["racesId"] as JArray).ToObject<string[]>(),
-                            (parameters["racesOffsets"] as JObject).ToObject<Dictionary<string, Vector2>>(),
-                            new Sprite(Path.Join(contentDirectory, (string)parameters["spritePath"]))
-                        )
-                    );
-                break;
-
-                case "Beard":
-                    Object.AddComponent(
-                        new Beard(
-                            (parameters["racesId"] as JArray).ToObject<string[]>(),
-                            (parameters["racesOffsets"] as JObject).ToObject<Dictionary<string, Vector2>>(),
-                            new Sprite(Path.Join(contentDirectory, (string)parameters["spritePath"]))
-                        )
-                    );
-                break;
-
-                case "RaceComponent" :
-                    var hairColorsHex = (parameters["hairColors"] as JArray).ToObject<string[]>();
-                    var hairColorsColor = new Color[hairColorsHex.Length];
-
-                    for (var i = 0; i < hairColorsHex.Length; i++){
-                        hairColorsColor[i] = Utils.HexToColor((string)hairColorsHex[i]);
-                    }
-
-                    var SkinColorsHex = (parameters["skinColors"] as JArray).ToObject<string[]>();
-                    var skinColorsColor = new Color[SkinColorsHex.Length];
-
-                    for (var i = 0; i < SkinColorsHex.Length; i++){
-                        skinColorsColor[i] = Utils.HexToColor((string)SkinColorsHex[i]);
-                    }
-                    
-
-                    Object.AddComponent(
-                        new RaceComponent(
-                            (string)parameters["raceId"],
-                            new Sprite((string)parameters["spriteMasculine"]),
-                            new Sprite((string)parameters["spriteFeminine"]),
-                            hairColorsColor,
-                            skinColorsColor
-                        )
-                    );
-
-                break;
-
-                case "Sprite":
-
-                    parameters.TryGetValue("Offset", out var offsetparameter );
-                    parameters.TryGetValue("ysortOffset", out var ysortparameter);
-                    parameters.TryGetValue("origin", out var originparameter);
-
-                    Vector2 offset;
-                    float ysort;
-                    SpriteOrigin origin;
-
-                    if (offsetparameter == null){
-                        offset = new Vector2(0,0);
-                    }
-                    else {
-                        offset = (offsetparameter as JObject).ToObject<Vector2>();
-                    }
-
-                    if (originparameter == null){
-                        origin = SpriteOrigin.TopLeft;
-                    }
-                    else {
-                        origin = new JValue(originparameter).ToObject<SpriteOrigin>();
-                    }
-
-                    if (ysortparameter == null){
-                        ysort = 0.0f;
-                    }
-                    else {
-                        ysort = (float)(double)ysortparameter;
-                    }
-
-                    Object.AddComponent(
-                        new Sprite(
-                            Path.Join(contentDirectory, (string)parameters["path"]), 
-                            new Vector2(1,1),
-                            offset,
-                            ysort,
-                            origin
-                        )
-                    );
-
-                break;
-
-                case "Equipment":
-                    Object.AddComponent(
-                        new EquipmentComponent(
-                            (parameters["racesOffsets"] as JObject).ToObject<Dictionary<string, Vector2>>(), 
-                            (parameters["flippedOffset"] as JObject).ToObject<Vector2>()
-                        )
-                    );
-                break;
-
-                case "ItemComponent":
-                    Object.AddComponent(
-                        new Item()
-                    );
-                break;
+            if (DeserializedComponent != null){
+                Object.AddComponent(DeserializedComponent);
             }
+
         }
         return Object;
     }
