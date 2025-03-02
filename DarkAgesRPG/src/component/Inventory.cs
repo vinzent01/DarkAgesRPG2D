@@ -39,7 +39,7 @@ public class Inventory : Component {
             return false;
         }
 
-        var itemComponent = item.GetComponent<Item>();
+        var itemComponent = item.GetComponent<ItemComponent>();
         var itemStackComponent = item.GetComponent<ItemStackComponent>();
 
         if (itemComponent != null || itemStackComponent != null){

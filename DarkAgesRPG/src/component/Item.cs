@@ -1,6 +1,6 @@
 namespace DarkAgesRPG;
 
-public class Item : Component{
+public class ItemComponent : Component{
 
     public Inventory? inventory;
     public float wheight = 0;

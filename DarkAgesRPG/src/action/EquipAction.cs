@@ -8,7 +8,7 @@ public class EquipAction : Action {
     public override bool OnStart()
     {
         EquipmentList? equips = obj.GetComponent<EquipmentList>();
-        var itemComponent = target.GetComponent<Item>();
+        var itemComponent = target.GetComponent<ItemComponent>();
 
         if (itemComponent == null)
             return false;

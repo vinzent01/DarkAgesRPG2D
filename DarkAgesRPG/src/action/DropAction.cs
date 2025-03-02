@@ -40,7 +40,7 @@ public class DropItemAction : Action {
             List<Object> ItemsToAddStack = [target];
             
             foreach (var objOnGround in objectsOnGround){
-                if (objOnGround.HasComponentType<Item>()){
+                if (objOnGround.HasComponentType<ItemComponent>()){
                     ItemsToAddStack.Add(objOnGround);
                     State.world.ToRemove(objOnGround);
                 }
@@ -61,7 +61,7 @@ public class DropItemAction : Action {
 
 
             foreach (var objOnGround in objectsOnGround) {
-                if (objOnGround.HasComponentType<Item>()) {
+                if (objOnGround.HasComponentType<ItemComponent>()) {
                     ItemsToAddStack.Add(objOnGround); // Adiciona o item à pilha
                     State.world.ToRemove(objOnGround);
                 }

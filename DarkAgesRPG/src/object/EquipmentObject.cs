@@ -34,7 +34,7 @@ public class EquipmentObject : Object{
 
     private void AddComponents(Sprite sprite, Vector2? offset, Vector2? flippedOffset){
         
-        AddComponent(new Item());
+        AddComponent(new ItemComponent());
         AddComponent(sprite);
 
         /*
