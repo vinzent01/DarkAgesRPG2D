@@ -10,14 +10,29 @@
             {
                 "className" : "MultiSprite",
                 "parameters" : {
-                    "path" : "res://creatures/wolf.png"
+                    "sprites" :{
+                        "closed" : "res://chests/chest-closed.png",
+                        "open" : "res://chests/chest-open.png"
+                    }
                 }
+            },
+            {
+                "className" : "InteractComponent",
+                "parameters" : {}
+            },
+            {
+                "className" : "Inventory",
+                "parameters" : {}
+            },
+            {
+                "className" : "ContainerComponent",
+                "parameters" : {}
             },
             {
                 "className" : "ActionsToPerform",
                 "parameters" : {
                     "actions" : [
-
+                        "OpenInventoryAction"
                     ]
                 }
             }

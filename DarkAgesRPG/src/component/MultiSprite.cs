@@ -1,4 +1,5 @@
 using System.Numerics;
+using Newtonsoft.Json.Linq;
 
 namespace DarkAgesRPG;
 
@@ -49,5 +50,18 @@ public class MultiSprite : Component{
         foreach (var sprite in spriteList){
             sprite.Load();
         }
+    }
+
+    public static MultiSprite Deserialize(Dictionary<string, object> parameters){
+        var spritesPaths = (parameters["sprites"] as JObject).ToObject<Dictionary<string, string>>();
+        var sprites = new Dictionary<string, Sprite>();
+
+        foreach (var spritePath in spritesPaths){
+            var newSprite = new Sprite(spritePath.Value);
+
+            sprites.Add(spritePath.Key, newSprite);
+        }
+
+        return new MultiSprite(sprites);
     }
 }

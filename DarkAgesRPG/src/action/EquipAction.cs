@@ -17,7 +17,7 @@ public class EquipAction : Action {
             return false;
 
         if (itemComponent.inventory != null){
-            itemComponent.inventory.RemoveItem(obj);
+            itemComponent.inventory.RemoveItem(target);
         }
 
         State.world.ToRemove(target);

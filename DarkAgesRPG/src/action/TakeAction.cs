@@ -10,8 +10,15 @@ public class TakeAction : Action {
     public override bool OnStart()
     {
         Inventory? inventory = obj.GetComponent<Inventory>();
+        ItemComponent item = target.GetComponent<ItemComponent>();
 
-        if (inventory != null){
+        if (inventory != null && item != null){
+            
+            // remove from inventory first
+            if (item.inventory != null){
+                item.inventory.RemoveItem(target);
+            }
+
             bool succes = inventory.AddItem(target);
 
             if (succes){

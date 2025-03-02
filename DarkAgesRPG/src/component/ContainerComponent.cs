@@ -34,4 +34,8 @@ public class ContainerComponent : Component {
             multisprite.SetCurrentSprite("closed");
         }
     }
+
+    public static ContainerComponent Deserialize(Dictionary<string, object> parameters){
+        return new ContainerComponent();
+    }
 }

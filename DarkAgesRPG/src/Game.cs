@@ -77,15 +77,26 @@ public class Game : IUpdatable, ILoadable, IDrawable
         );
 
         var axeAsset = State.packageManager.GetAsset("axe");
+        var chestAsset = State.packageManager.GetAsset("chest");
 
-        if (axeAsset != null){
-            var axeObject = axeAsset.Instanciate();
+        if (chestAsset != null){
+            var chestObject = chestAsset.Instanciate();
+            chestObject.CellPosition = new Vector2i(51, 50);
+            State.world.AddChild(chestObject);
 
-            axeObject.CellPosition = new Vector2i(50, 50);
+            if (axeAsset != null){
+                var axeObject = axeAsset.Instanciate();
+                axeObject.CellPosition = new Vector2i(50, 50);
+                axeObject.IsVisible = false;
 
-            State.world.AddChild(axeObject);
+                State.world.AddChild(axeObject);
+                var chestInventory = chestObject.GetComponent<Inventory>();
+
+                if (chestInventory != null){
+                    chestInventory.AddItem(axeObject);
+                }
+            }
         }
-
 
         horse.Flip(true);
         horse.CellPosition = new Vector2i(2,2);

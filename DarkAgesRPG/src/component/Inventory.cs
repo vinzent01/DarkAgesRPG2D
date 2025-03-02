@@ -82,7 +82,7 @@ public class Inventory : Component {
                 
                 itemsOrStacks[i] = newItemStack; // Substitui o item pela nova pilha
                 OnChange?.Invoke();
-                return false;
+                return true;
             }
         }
 
@@ -138,8 +138,9 @@ public class Inventory : Component {
         }
 
         return false;
+    }
 
-
-        // Caso o item não tenha sido encontrado, nada é feito
+    public static Inventory Deserialize(Dictionary<string, object> parameters){
+        return new Inventory();
     }
 }
