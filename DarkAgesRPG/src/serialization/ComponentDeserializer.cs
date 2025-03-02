@@ -4,7 +4,7 @@ namespace DarkAgesRPG;
 
 public class ComponentDeserializer
 {
-    private static Dictionary<string, Type> _componentTypes = new();
+    private static Dictionary<string, Type> ComponentTypes = new();
 
     static ComponentDeserializer()
     {
@@ -14,14 +14,14 @@ public class ComponentDeserializer
         {
             if (typeof(Component).IsAssignableFrom(type) && !type.IsAbstract)
             {
-                _componentTypes[type.Name] = type;
+                ComponentTypes[type.Name] = type;
             }
         }
     }
 
     public static Component? Deserialize(string className, Dictionary<string, object> parameters)
     {
-        if (_componentTypes.TryGetValue(className, out var type))
+        if (ComponentTypes.TryGetValue(className, out var type))
         {
             var method = type.GetMethod("Deserialize", BindingFlags.Public | BindingFlags.Static);
             if (method != null)
