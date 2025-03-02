@@ -62,8 +62,21 @@
                 }
             },
             {
+                "className" : "InteractComponent",
+                "parameters" : {}
+            },
+            {
                 "className" : "ItemComponent",
                 "parameters" : {}
+            },
+            {
+                "className" : "ActionsToPerform",
+                "parameters" : {
+                    "actions" : [
+                        "TakeAction",
+                        "EquipAction"
+                    ]
+                }
             }
         ]
     }

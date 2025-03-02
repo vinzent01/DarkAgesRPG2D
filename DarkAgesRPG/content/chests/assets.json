@@ -1,0 +1,27 @@
+[
+    {
+        "name" : "Chest",
+        "id" : "chest",
+        "tags" : [ "furniture"],
+        "type" : "Object",
+
+
+        "components" : [
+            {
+                "className" : "MultiSprite",
+                "parameters" : {
+                    "path" : "res://creatures/wolf.png"
+                }
+            },
+            {
+                "className" : "ActionsToPerform",
+                "parameters" : {
+                    "actions" : [
+
+                    ]
+                }
+            }
+        ]
+
+    }
+]

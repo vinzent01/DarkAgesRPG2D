@@ -82,18 +82,7 @@ public class Game : IUpdatable, ILoadable, IDrawable
             var axeObject = axeAsset.Instanciate();
 
             axeObject.CellPosition = new Vector2i(50, 50);
-            // PROVISORY:
-            axeObject.AddComponent(
-                new InteractComponent()
-            );
-            axeObject.AddComponent(
-                new ActionsToPerform(
-                    [
-                        new TakeAction(),
-                        new EquipAction()
-                    ]
-                )
-            );
+
             State.world.AddChild(axeObject);
         }
 
